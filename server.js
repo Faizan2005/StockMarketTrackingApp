@@ -7,20 +7,21 @@ const path = require("path");
 const finnhub = require("finnhub");
 const fs = require("fs");
 const redis = require("./redisClient");
-const e = require("express");
-const { channel } = require("diagnostics_channel");
-const { time, error } = require("console");
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// Refresh every 24 hrs = 24 * 60 * 60 * 1000 ms
 const DAY_MS = 86400000;
 
 const FINNHUB_API_KEY = process.env.FINNHUB_API_KEY;
 const FINNHUB_API_URL = `wss://ws.finnhub.io?token=${FINNHUB_API_KEY}`;
-console.log("Establishing connection with:", FINNHUB_API_URL);
+console.log("[Init] Using Finnhub WebSocket URL:", FINNHUB_API_URL);
+
+if (!FINNHUB_API_KEY) {
+  console.error("[Fatal] FINNHUB_API_KEY is not set in .env file");
+  process.exit(1);
+}
 
 // WebSocket connection to Finnhub
 const socket = new WebSocket(FINNHUB_API_URL);
@@ -32,25 +33,26 @@ const api_key = finnhub.ApiClient.instance.authentications["api_key"];
 api_key.apiKey = FINNHUB_API_KEY;
 const finnhubClient = new finnhub.DefaultApi();
 
-// Check timestamps and conditionally fetch new data
 const now = Date.now();
 let lastStockTimestamp = 0;
 
 try {
+  console.log("[Startup] Reading stockTimestamp.json...");
   lastStockTimestamp = JSON.parse(
     fs.readFileSync("stockTimestamp.json", "utf-8")
   );
+  console.log("[Startup] Last stock timestamp loaded:", lastStockTimestamp);
 } catch (e) {
-  console.warn("stockTimestamp.json not found or invalid, fetching data...");
+  console.warn("[Startup] stockTimestamp.json not found or invalid, proceeding with fetch.");
 }
 
 if (shouldFetch("timestamp.json")) {
-  console.log("Fetching fresh stock and crypto symbols...");
+  console.log("[Fetch] Starting fresh symbol fetch...");
 
-  // Promisify the fetches to wait for both
   const fetchStock = new Promise((resolve, reject) => {
     finnhubClient.stockSymbols("US", (err, data) => {
-      if (err) return reject("Stock fetch error: " + err);
+      if (err) return reject("[Fetch] Stock fetch error: " + err);
+      console.log("[Fetch] Stock symbols fetched:", data.length);
       saveToFile("stockSymbols.json", data);
       resolve();
     });
@@ -58,7 +60,8 @@ if (shouldFetch("timestamp.json")) {
 
   const fetchCrypto = new Promise((resolve, reject) => {
     finnhubClient.cryptoSymbols("BINANCE", (err, data) => {
-      if (err) return reject("Crypto fetch error: " + err);
+      if (err) return reject("[Fetch] Crypto fetch error: " + err);
+      console.log("[Fetch] Crypto symbols fetched:", data.length);
       saveToFile("cryptoSymbols.json", data);
       resolve();
     });
@@ -66,96 +69,108 @@ if (shouldFetch("timestamp.json")) {
 
   Promise.all([fetchStock, fetchCrypto])
     .then(() => {
+      console.log("[Fetch] All symbols fetched and saved.");
       saveToFile("timestamp.json", Date.now());
     })
     .catch((err) => {
-      console.error("Error during data fetch:", err);
+      console.error("[Fetch] Error during fetch:", err);
     });
 }
 
 function saveToFile(fileName, data) {
-  fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
-  console.log(`${fileName} saved. Total ${data.length ?? "?"}`);
+  try {
+    fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
+    console.log(`[File] ${fileName} saved successfully.`);
+  } catch (err) {
+    console.error(`[File] Failed to save ${fileName}:`, err);
+  }
 }
 
 function shouldFetch(fileName) {
   try {
     const timeStamp = JSON.parse(fs.readFileSync(fileName, "utf-8"));
-    return Date.now() - timeStamp >= DAY_MS;
-  } catch {
-    return true; // File doesn't exist or is invalid
+    const should = Date.now() - timeStamp >= DAY_MS;
+    console.log(`[Check] Should fetch new data? ${should}`);
+    return should;
+  } catch (err) {
+    console.warn("[Check] Timestamp check failed, defaulting to fetch.");
+    return true;
   }
 }
 
-// When WebSocket connection opens
+// WebSocket connection established
 socket.on("open", () => {
-  console.log("WebSocket connected to Finnhub");
+  console.log("[WebSocket] Connected to Finnhub");
 
-  // Load symbols from JSON
   let stockSymbols = [];
   let cryptoSymbols = [];
 
   try {
     stockSymbols = JSON.parse(fs.readFileSync("stockSymbols.json", "utf-8"))
-      .slice(0, 5) // Limit for testing; remove in prod
+      .slice(0, 5)
       .map((entry) => entry.symbol);
+    console.log("[WebSocket] Loaded stock symbols:", stockSymbols);
   } catch (e) {
-    console.error("Error reading stockSymbols.json:", e);
+    console.error("[WebSocket] Error reading stockSymbols.json:", e);
   }
 
   try {
     cryptoSymbols = JSON.parse(fs.readFileSync("cryptoSymbols.json", "utf-8"))
       .slice(0, 5)
       .map((entry) => entry.symbol);
+    console.log("[WebSocket] Loaded crypto symbols:", cryptoSymbols);
   } catch (e) {
-    console.error("Error reading cryptoSymbols.json:", e);
+    console.error("[WebSocket] Error reading cryptoSymbols.json:", e);
   }
 
   const allSymbols = [...stockSymbols, ...cryptoSymbols];
   allSymbols.forEach((symbol) => {
     socket.send(JSON.stringify({ type: "subscribe", symbol }));
-    console.log("Subscribed to:", symbol);
+    console.log(`[WebSocket] Subscribed to: ${symbol}`);
   });
 
-  // Start quote polling
-  initQuotePolling(allSymbols, 3000); // poll every 3
+  console.log("[Polling] Starting quote polling...");
+  initQuotePolling(allSymbols, 3000);
 });
 
-// On incoming WebSocket messages
+// On WebSocket message
 socket.on("message", (msg) => {
-  console.log("Received from Finnhub:", msg);
+  console.log("[WebSocket] Received message.");
   try {
     const data = JSON.parse(msg);
-    console.log(data);
     if (data.type === "trade") {
+      console.log("[WebSocket] Trade data received, emitting to clients.");
       io.emit("stockData", data);
     }
   } catch (err) {
-    console.error("Error parsing message:", err);
+    console.error("[WebSocket] Message parse error:", err);
   }
 });
 
 socket.on("error", (err) => {
-  console.error("WebSocket error:", err.message);
+  console.error("[WebSocket] Connection error:", err.message);
 });
 
 socket.on("close", (code, reason) => {
-  console.warn(`WebSocket closed. Code: ${code}, Reason: ${reason}`);
+  console.warn(`[WebSocket] Connection closed. Code: ${code}, Reason: ${reason}`);
 });
 
 const PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {
-  console.log("Server listening on:", PORT);
-  console.log(`http://localhost:${PORT}`);
+  console.log(`[Server] Listening on port ${PORT}`);
+  console.log(`[Server] Visit: http://localhost:${PORT}`);
 });
 
+// API endpoints
 app.get("/symbols/stocks", (req, res) => {
   try {
     const stockSymbols = JSON.parse(
       fs.readFileSync("stockSymbols.json", "utf-8")
     ).map((entry) => entry.symbol);
+    console.log("[API] /symbols/stocks requested.");
     res.json(stockSymbols);
   } catch (err) {
+    console.error("[API] Failed to get stock symbols:", err);
     res.status(500).json({ error: "Failed to read stock symbols." });
   }
 });
@@ -165,19 +180,23 @@ app.get("/symbols/crypto", (req, res) => {
     const cryptoSymbols = JSON.parse(
       fs.readFileSync("cryptoSymbols.json", "utf-8")
     ).map((entry) => entry.symbol);
+    console.log("[API] /symbols/crypto requested.");
     res.json(cryptoSymbols);
   } catch (err) {
+    console.error("[API] Failed to get crypto symbols:", err);
     res.status(500).json({ error: "Failed to read crypto symbols." });
   }
 });
 
+// Quote polling
 async function fetchQuote(symbol) {
   return new Promise((resolve, reject) => {
-    finnhubClient.quote(symbol, (error, data, response) => {
+    finnhubClient.quote(symbol, (error, data) => {
       if (error) {
-        console.error("Error fetching quotes from Finnhub", error);
+        console.error(`[Quote] Error fetching ${symbol}:`, error);
         return reject(error);
       }
+      console.log(`[Quote] Fetched quote for ${symbol}:`, data);
       resolve({
         price: data.c,
         change: data.d,
@@ -193,19 +212,21 @@ async function fetchQuote(symbol) {
 }
 
 function initQuotePolling(symbols, interval = 3000) {
-  setInterval(
-    async () => {
-      for (const symbol of symbols) {
+  setInterval(async () => {
+    for (const symbol of symbols) {
+      try {
         const quote = await fetchQuote(symbol);
         const cache = await redis.get(symbol);
-
         if (JSON.stringify(quote) !== JSON.stringify(cache)) {
+          console.log(`[Polling] Quote changed for ${symbol}, emitting update.`);
           io.emit("quoteUpdate", { symbol, ...quote });
           await redis.set(symbol, JSON.stringify(quote), "EX", 10);
+        } else {
+          console.log(`[Polling] No change in quote for ${symbol}.`);
         }
+      } catch (err) {
+        console.error(`[Polling] Error in polling quote for ${symbol}:`, err);
       }
-    },
-
-    interval
-  );
+    }
+  }, interval);
 }
