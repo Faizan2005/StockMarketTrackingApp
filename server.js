@@ -100,7 +100,7 @@ socket.on("open", () => {
   try {
     cryptoSymbols = JSON.parse(fs.readFileSync("cryptoSymbols.json", "utf-8"))
       .slice(0, 5)
-      .map((entry) => `BINANCE:${entry.symbol}`);
+      .map((entry) => entry.symbol);
   } catch (e) {
     console.error("Error reading cryptoSymbols.json:", e);
   }
@@ -117,8 +117,10 @@ socket.on("message", (msg) => {
   console.log("Received from Finnhub:", msg); 
   try {
     const data = JSON.parse(msg);
-    if (data.type === "trade") {
+    console.log(data)
+    if (data.type === "trade") {   
       io.emit("stockData", data);
+      
     }
   } catch (err) {
     console.error("Error parsing message:", err);

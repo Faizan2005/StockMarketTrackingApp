@@ -17,7 +17,7 @@
     <div id="stocks"></div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      const socket = io("http://localhost:8000");
+      const socket = io();
       const stocksDiv = document.getElementById("stocks");
       const stocks = {};
 
