@@ -6,6 +6,10 @@ const { Server } = require("socket.io");
 const path = require("path");
 const finnhub = require("finnhub");
 const fs = require("fs");
+const redis = require("./redisClient");
+const e = require("express");
+const { channel } = require("diagnostics_channel");
+const { time } = require("console");
 
 const app = express();
 const server = http.createServer(app);
@@ -33,12 +37,14 @@ const now = Date.now();
 let lastStockTimestamp = 0;
 
 try {
-  lastStockTimestamp = JSON.parse(fs.readFileSync("stockTimestamp.json", "utf-8"));
+  lastStockTimestamp = JSON.parse(
+    fs.readFileSync("stockTimestamp.json", "utf-8")
+  );
 } catch (e) {
   console.warn("stockTimestamp.json not found or invalid, fetching data...");
 }
 
-if (shouldFetch('timestamp.json')) {
+if (shouldFetch("timestamp.json")) {
   console.log("Fetching fresh stock and crypto symbols...");
 
   // Promisify the fetches to wait for both
@@ -73,10 +79,10 @@ function saveToFile(fileName, data) {
 }
 
 function shouldFetch(fileName) {
-    try{
-        const timeStamp = JSON.parse(fs.readFileSync(fileName, 'utf-8'))
-        return Date.now() - timeStamp >= DAY_MS
-    } catch {
+  try {
+    const timeStamp = JSON.parse(fs.readFileSync(fileName, "utf-8"));
+    return Date.now() - timeStamp >= DAY_MS;
+  } catch {
     return true; // File doesn't exist or is invalid
   }
 }
@@ -114,13 +120,12 @@ socket.on("open", () => {
 
 // On incoming WebSocket messages
 socket.on("message", (msg) => {
-  console.log("Received from Finnhub:", msg); 
+  console.log("Received from Finnhub:", msg);
   try {
     const data = JSON.parse(msg);
-    console.log(data)
-    if (data.type === "trade") {   
+    console.log(data);
+    if (data.type === "trade") {
       io.emit("stockData", data);
-      
     }
   } catch (err) {
     console.error("Error parsing message:", err);
@@ -140,3 +145,63 @@ server.listen(PORT, () => {
   console.log("Server listening on:", PORT);
   console.log(`http://localhost:${PORT}`);
 });
+
+app.get("/symbols/stocks", (req, res) => {
+  try {
+    const stockSymbols = JSON.parse(
+      fs.readFileSync("stockSymbols.json", "utf-8")
+    ).map((entry) => entry.symbol);
+    res.json(stockSymbols);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to read stock symbols." });
+  }
+});
+
+app.get("/symbols/crypto", (req, res) => {
+  try {
+    const cryptoSymbols = JSON.parse(
+      fs.readFileSync("cryptoSymbols.json", "utf-8")
+    ).map((entry) => entry.symbol);
+    res.json(cryptoSymbols);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to read crypto symbols." });
+  }
+});
+
+async function fetchQuote(symbol) {
+  try {
+    finnhubClient.quote(symbol, (error, data, response) => {
+      console.log(data);
+      return {
+        price: data.c, // current price
+        change: data.d, // change
+        change_percent: data.dp,
+        open: data.o,
+        high: data.h,
+        low: data.l,
+        close_previous: data.pc,
+        timeStamp: data.t,
+      };
+    });
+  } catch (err) {
+    console.error("Error fetching quotes from Finnhub", err);
+  }
+}
+
+function initQuotePolling(symbols, interval = 3000) {
+  setInterval(
+    async () => {
+      for (const symbol of symbols) {
+        const quote = await fetchQuote(symbol);
+        const cache = await redis.get(symbol);
+
+        if (JSON.stringify(quote) !== JSON.stringify(cache)) {
+          io.emit("quoteUpdate", { symbol, ...quote });
+          await redis.set(symbol, JSON.stringify(quote), "EX", 10);
+        }
+      }
+    },
+
+    interval
+  );
+}

@@ -1,0 +1,52 @@
+[
+    {
+        "description": "Apple Inc.",
+        "displaySymbol": "AAPL",
+        "symbol": "NASDAQ:AAPL"
+    },
+    {
+        "description": "Microsoft Corporation",
+        "displaySymbol": "MSFT",
+        "symbol": "NASDAQ:MSFT"
+    },
+    {
+        "description": "Amazon.com, Inc.",
+        "displaySymbol": "AMZN",
+        "symbol": "NASDAQ:AMZN"
+    },
+    {
+        "description": "Alphabet Inc. Class A",
+        "displaySymbol": "GOOGL",
+        "symbol": "NASDAQ:GOOGL"
+    },
+    {
+        "description": "Tesla, Inc.",
+        "displaySymbol": "TSLA",
+        "symbol": "NASDAQ:TSLA"
+    },
+    {
+        "description": "Meta Platforms, Inc.",
+        "displaySymbol": "META",
+        "symbol": "NASDAQ:META"
+    },
+    {
+        "description": "NVIDIA Corporation",
+        "displaySymbol": "NVDA",
+        "symbol": "NASDAQ:NVDA"
+    },
+    {
+        "description": "Berkshire Hathaway Inc.",
+        "displaySymbol": "BRK.A",
+        "symbol": "NYSE:BRK.A"
+    },
+    {
+        "description": "Johnson & Johnson",
+        "displaySymbol": "JNJ",
+        "symbol": "NYSE:JNJ"
+    },
+    {
+        "description": "Walmart Inc.",
+        "displaySymbol": "WMT",
+        "symbol": "NYSE:WMT"
+    }
+]
