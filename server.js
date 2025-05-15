@@ -9,7 +9,7 @@ const fs = require("fs");
 const redis = require("./redisClient");
 const e = require("express");
 const { channel } = require("diagnostics_channel");
-const { time } = require("console");
+const { time, error } = require("console");
 
 const app = express();
 const server = http.createServer(app);
@@ -116,6 +116,9 @@ socket.on("open", () => {
     socket.send(JSON.stringify({ type: "subscribe", symbol }));
     console.log("Subscribed to:", symbol);
   });
+
+  // Start quote polling
+  initQuotePolling(allSymbols, 3000); // poll every 3
 });
 
 // On incoming WebSocket messages
@@ -169,23 +172,24 @@ app.get("/symbols/crypto", (req, res) => {
 });
 
 async function fetchQuote(symbol) {
-  try {
+  return new Promise((resolve, reject) => {
     finnhubClient.quote(symbol, (error, data, response) => {
-      console.log(data);
-      return {
-        price: data.c, // current price
-        change: data.d, // change
+      if (error) {
+        console.error("Error fetching quotes from Finnhub", error);
+        return reject(error);
+      }
+      resolve({
+        price: data.c,
+        change: data.d,
         change_percent: data.dp,
         open: data.o,
         high: data.h,
         low: data.l,
         close_previous: data.pc,
         timeStamp: data.t,
-      };
+      });
     });
-  } catch (err) {
-    console.error("Error fetching quotes from Finnhub", err);
-  }
+  });
 }
 
 function initQuotePolling(symbols, interval = 3000) {

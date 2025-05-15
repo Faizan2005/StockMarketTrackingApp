@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <title>Stock Tracker MVP</title>
@@ -43,4 +43,60 @@
       });
     </script>
   </body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stock Tracker MVP</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+        background: #f8f9fa;
+      }
+      .stock {
+        background: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .positive {
+        color: green;
+      }
+      .negative {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📈 Live Stock Prices</h1>
+    <div id="stocks"></div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      const stocksDiv = document.getElementById("stocks");
+      const stockElements = {};
+
+      socket.on("quoteUpdate", (data) => {
+        const { symbol, c, d, dp, h, l, o, pc } = data;
+        const changeClass = dp >= 0 ? "positive" : "negative";
+
+        const html = `
+          <div class="stock ${changeClass}">
+            <strong>${symbol}</strong><br>
+            💰 Current: $${c.toFixed(2)}<br>
+            📉 Open: $${o.toFixed(2)}, High: $${h.toFixed(2)}, Low: $${l.toFixed(2)}<br>
+            📊 Change: ${d.toFixed(2)} (${dp.toFixed(2)}%)
+          </div>
+        `;
+
+        stockElements[symbol] = html;
+        stocksDiv.innerHTML = Object.values(stockElements).join("");
+      });
+    </script>
+  </body>
 </html>
+
