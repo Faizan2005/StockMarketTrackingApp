@@ -6,7 +6,6 @@ const { Server } = require("socket.io");
 const path = require("path");
 const finnhub = require("finnhub");
 const fs = require("fs");
-const { timeStamp } = require("console");
 
 const app = express();
 const server = http.createServer(app);
