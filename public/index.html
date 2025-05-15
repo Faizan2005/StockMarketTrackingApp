@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stock Tracker MVP</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        padding: 20px;
+      }
+      .stock {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Live Stock Prices</h1>
+    <div id="stocks"></div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io("http://localhost:8000");
+      const stocksDiv = document.getElementById("stocks");
+      const stocks = {};
+
+      socket.on("stockData", (data) => {
+        console.log("Received stockData event:", data);
+
+        const trades = data.data;
+        trades.forEach(({ s, p, t, v }) => {
+          const time = new Date(t).toLocaleTimeString();
+          stocks[s] = `
+      <div class="stock">
+        <strong>${s}</strong><br>
+        Price: $${p}<br>
+        Volume: ${v}<br>
+        Time: ${time}
+      </div>
+    `;
+        });
+
+        console.log("Current stocks object:", stocks);
+
+        stocksDiv.innerHTML = Object.values(stocks).join("");
+      });
+    </script>
+  </body>
+</html>
