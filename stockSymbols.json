@@ -1,52 +1,101 @@
 [
-    {
-        "description": "Apple Inc.",
-        "displaySymbol": "AAPL",
-        "symbol": "NASDAQ:AAPL"
-    },
-    {
-        "description": "Microsoft Corporation",
-        "displaySymbol": "MSFT",
-        "symbol": "NASDAQ:MSFT"
-    },
-    {
-        "description": "Amazon.com, Inc.",
-        "displaySymbol": "AMZN",
-        "symbol": "NASDAQ:AMZN"
-    },
-    {
-        "description": "Alphabet Inc. Class A",
-        "displaySymbol": "GOOGL",
-        "symbol": "NASDAQ:GOOGL"
-    },
-    {
-        "description": "Tesla, Inc.",
-        "displaySymbol": "TSLA",
-        "symbol": "NASDAQ:TSLA"
-    },
-    {
-        "description": "Meta Platforms, Inc.",
-        "displaySymbol": "META",
-        "symbol": "NASDAQ:META"
-    },
-    {
-        "description": "NVIDIA Corporation",
-        "displaySymbol": "NVDA",
-        "symbol": "NASDAQ:NVDA"
-    },
-    {
-        "description": "Berkshire Hathaway Inc.",
-        "displaySymbol": "BRK.A",
-        "symbol": "NYSE:BRK.A"
-    },
-    {
-        "description": "Johnson & Johnson",
-        "displaySymbol": "JNJ",
-        "symbol": "NYSE:JNJ"
-    },
-    {
-        "description": "Walmart Inc.",
-        "displaySymbol": "WMT",
-        "symbol": "NYSE:WMT"
-    }
+  {
+    "currency": "USD",
+    "description": "UAN POWER CORP",
+    "displaySymbol": "UPOW",
+    "figi": "BBG000BGHYF2",
+    "mic": "OTCM",
+    "symbol": "UPOW",
+    "type": "Common Stock"
+  },
+  {
+    "currency": "USD",
+    "description": "APPLE INC",
+    "displaySymbol": "AAPL",
+    "figi": "BBG000B9Y5X2",
+    "mic": "XNGS",
+    "symbol": "AAPL",
+    "type": "Common Stock"
+  },
+  {
+    "currency": "USD",
+    "description": "EXCO TECHNOLOGIES LTD",
+    "displaySymbol": "EXCOF",
+    "figi": "BBG000JHDDS8",
+    "mic": "OOTC",
+    "symbol": "EXCOF",
+    "type": "Common Stock"
+  },
+  {
+    "currency": "USD",
+    "description": "MICROSOFT CORPORATION",
+    "displaySymbol": "MSFT",
+    "figi": "BBG000B9Y5X3",
+    "mic": "XNGS",
+    "symbol": "MSFT",
+    "type": "Common Stock"
+  },
+  {
+    "currency": "USD",
+    "description": "AMAZON.COM INC",
+    "displaySymbol": "AMZN",
+    "figi": "BBG000B9Y5X4",
+    "mic": "XNGS",
+    "symbol": "AMZN",
+    "type": "Common Stock"
+  },
+  {
+    "currency": "USD",
+    "description": "TESLA INC",
+    "displaySymbol": "TSLA",
+    "figi": "BBG000B9Y5X5",
+    "mic": "XNGS",
+    "symbol": "TSLA",
+    "type": "Common Stock"
+  },
+  {
+    "currency": "USD",
+    "description": "NVIDIA CORPORATION",
+    "displaySymbol": "NVDA",
+    "figi": "BBG000B9Y5X6",
+    "mic": "XNGS",
+    "symbol": "NVDA",
+    "type": "Common Stock"
+  },
+  {
+    "currency": "USD",
+    "description": "META PLATFORMS INC",
+    "displaySymbol": "META",
+    "figi": "BBG000B9Y5X7",
+    "mic": "XNGS",
+    "symbol": "META",
+    "type": "Common Stock"
+  },
+  {
+    "currency": "USD",
+    "description": "BERKSHIRE HATHAWAY INC",
+    "displaySymbol": "BRK.A",
+    "figi": "BBG000B9Y5X8",
+    "mic": "XNYS",
+    "symbol": "BRK.A",
+    "type": "Common Stock"
+  },
+  {
+    "currency": "USD",
+    "description": "JOHNSON & JOHNSON",
+    "displaySymbol": "JNJ",
+    "figi": "BBG000B9Y5X9",
+    "mic": "XNYS",
+    "symbol": "JNJ",
+    "type": "Common Stock"
+  },
+  {
+    "currency": "USD",
+    "description": "WALMART INC",
+    "displaySymbol": "WMT",
+    "figi": "BBG000B9Y5X0",
+    "mic": "XNYS",
+    "symbol": "WMT",
+    "type": "Common Stock"
+  }
 ]

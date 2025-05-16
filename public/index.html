@@ -1,61 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Stock Tracker MVP</title>
+    <meta charset="UTF-8" />
+    <title>Stock and Quote Dashboard</title>
     <style>
       body {
-        font-family: sans-serif;
+        font-family: Arial, sans-serif;
         padding: 20px;
-        background: #f8f9fa;
       }
-      .stock {
-        background: #fff;
+      .section {
+        margin-bottom: 30px;
+      }
+      .section h2 {
+        border-bottom: 2px solid #ccc;
+        padding-bottom: 5px;
+      }
+      .entry {
+        background: #f4f4f4;
         padding: 10px;
+        border-radius: 5px;
         margin-bottom: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      .positive {
-        color: green;
-      }
-      .negative {
-        color: red;
       }
     </style>
   </head>
   <body>
-    <h1>📈 Live Stock Prices</h1>
-    <div id="stocks"></div>
+    <div class="section">
+      <h2>Quote Updates</h2>
+      <div id="quotes"></div>
+    </div>
+
+    <div class="section">
+      <h2>Stock Trades</h2>
+      <div id="stocks"></div>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
-      const stocksDiv = document.getElementById("stocks");
-      const stockElements = {};
 
-      function safeToFixed(value, digits = 2) {
-        return typeof value === "number" && !isNaN(value)
-          ? value.toFixed(digits)
-          : "N/A";
+      const quotesDiv = document.getElementById("quotes");
+      const stocksDiv = document.getElementById("stocks");
+
+      // Helper to format timestamp
+      function formatTime(ms) {
+        const date = new Date(ms);
+        return date.toLocaleTimeString();
       }
 
-      socket.on("quoteUpdate", (data) => {
-        const { symbol, c, d, dp, h, l, o, pc } = data;
-        const changeClass = dp >= 0 ? "positive" : "negative";
+      // Handle quote updates
+      socket.on("quoteUpdate", (quote) => {
+        console.log("Received quote update", quote);
+        const div = document.createElement("div");
+        div.className = "entry";
+        div.innerHTML = `
+    <strong>Quote for Stock:</strong> ${quote.symbol}<br/>
+    Price: ${quote.price}<br/>
+    Open: ${quote.open}<br/>
+    High: ${quote.high}<br/>
+    Low: ${quote.low}<br/>
+    Previous Close: ${quote.close_previous}<br/>
+    Change: ${quote.change !== null ? quote.change : "N/A"}<br/>
+    Percent Change: ${
+      quote.change_percent !== null ? quote.change_percent + "%" : "N/A"
+    }
+  `;
+        quotesDiv.prepend(div);
+      });
 
-        const html = `
-      <div class="stock ${changeClass}">
-        <strong>${symbol}</strong><br>
-        💰 Current: $${safeToFixed(c)}<br>
-        📉 Open: $${safeToFixed(o)}, High: $${safeToFixed(
-          h
-        )}, Low: $${safeToFixed(l)}<br>
-        📊 Change: ${safeToFixed(d)} (${safeToFixed(dp)}%)
-      </div>
-    `;
-
-        stockElements[symbol] = html;
-        stocksDiv.innerHTML = Object.values(stockElements).join("");
+      // Handle stock trades
+      socket.on("stockData", (payload) => {
+        if (payload && Array.isArray(payload.data)) {
+          payload.data.forEach((trade) => {
+            const div = document.createElement("div");
+            div.className = "entry";
+            div.innerHTML = `
+            <strong>Symbol:</strong> ${trade.s}<br/>
+            <strong>Price:</strong> ${trade.p}<br/>
+            <strong>Volume:</strong> ${trade.v}<br/>
+            <strong>Time:</strong> ${formatTime(trade.t)}<br/>
+            <strong>Conditions:</strong> [${trade.c.join(", ")}]
+          `;
+            stocksDiv.prepend(div);
+          });
+        }
       });
     </script>
   </body>

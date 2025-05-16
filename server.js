@@ -7,6 +7,7 @@ const path = require("path");
 const finnhub = require("finnhub");
 const fs = require("fs");
 const redis = require("./redisClient");
+const ms = require("ms");
 
 const app = express();
 const server = http.createServer(app);
@@ -130,7 +131,7 @@ socket.on("open", () => {
   });
 
   console.log("[Polling] Starting quote polling...");
-  initQuotePolling(allSymbols, 3000);
+  initQuotePolling(allSymbols, 10000);
 });
 
 // On WebSocket message
@@ -138,6 +139,7 @@ socket.on("message", (msg) => {
   console.log("[WebSocket] Received message.");
   try {
     const data = JSON.parse(msg);
+    console.log(data)
     if (data.type === "trade") {
       console.log("[WebSocket] Trade data received, emitting to clients.");
       io.emit("stockData", data);
@@ -211,7 +213,7 @@ async function fetchQuote(symbol) {
   });
 }
 
-function initQuotePolling(symbols, interval = 3000) {
+function initQuotePolling(symbols, interval) {
   setInterval(async () => {
     for (const symbol of symbols) {
       try {
