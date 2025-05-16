@@ -4,33 +4,142 @@
     <meta charset="UTF-8" />
     <title>Stock and Quote Dashboard</title>
     <style>
+      /* Reset and base */
+      * {
+        box-sizing: border-box;
+      }
       body {
-        font-family: Arial, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #000000;
+        color: #fff;
         padding: 20px;
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        height: 100vh;
+        overflow: hidden;
       }
       .section {
-        margin-bottom: 30px;
+        width: 48%;
+        border-radius: 10px;
+        background: #111111;
+        box-shadow:
+          0 0 15px #ffcc33aa,
+          inset 0 0 15px #ffcc33aa;
+        display: flex;
+        flex-direction: column;
+        max-height: 100%;
+        overflow: hidden;
       }
-      .section h2 {
-        border-bottom: 2px solid #ccc;
-        padding-bottom: 5px;
+      .header {
+        background: #ffcc33; /* Neon mustard yellow */
+        color: #222;
+        font-weight: 700;
+        font-size: 1.6em;
+        text-align: center;
+        padding: 15px 10px;
+        border-radius: 10px 10px 0 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        text-shadow:
+          0 0 7px #ffcc33;
+        user-select: none;
+        box-shadow:
+          inset 0 -3px 10px #cca300cc;
       }
-      .entry {
-        background: #f4f4f4;
+      #quotes, #stocks {
         padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 10px;
+        overflow-y: auto;
+        max-height: calc(100vh - 90px);
+        scrollbar-width: thin;
+        scrollbar-color: #ffcc33 #222;
+        border-radius: 0 0 10px 10px;
+      }
+      /* Webkit scrollbar for Chrome, Edge, Safari */
+      #quotes::-webkit-scrollbar,
+      #stocks::-webkit-scrollbar {
+        width: 12px;
+      }
+      #quotes::-webkit-scrollbar-track,
+      #stocks::-webkit-scrollbar-track {
+        background: #222;
+        border-radius: 10px;
+      }
+      #quotes::-webkit-scrollbar-thumb,
+      #stocks::-webkit-scrollbar-thumb {
+        background-color: #ffcc33;
+        border-radius: 10px;
+        border: 3px solid #222;
+      }
+
+      .entry {
+        background: #1a1a1a;
+        padding: 16px 20px;
+        margin-bottom: 14px;
+        border-radius: 8px;
+        filter: drop-shadow(0 0 6px #ffcc33aa);
+        transition: background 0.4s ease;
+      }
+      .entry:hover {
+        background: #333333;
+        filter: drop-shadow(0 0 12px #ffcc33ee);
+      }
+      .price {
+        font-size: 1.7em;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+      .change-positive {
+        color: #39ff14;
+        font-weight: 700;
+        text-shadow: 0 0 10px #39ff14;
+      }
+      .change-negative {
+        color: #ff073a;
+        font-weight: 700;
+        text-shadow: 0 0 10px #ff073a;
+      }
+      .change-neutral {
+        color: #ffcc33;
+        font-weight: 700;
+        text-shadow: 0 0 10px #ffcc33;
+      }
+      .quote, .trade {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .quote div, .trade div {
+        flex: 1 1 45%;
+        padding: 6px 12px 6px 0;
+      }
+      .logo {
+        width: 26px;
+        height: 26px;
+        vertical-align: middle;
+        margin-right: 8px;
+        filter: drop-shadow(0 0 4px #ffcc33);
+        border-radius: 4px;
+      }
+      .symbol-header {
+        font-size: 1.4em;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        margin-bottom: 14px;
+        letter-spacing: 0.065em;
       }
     </style>
   </head>
   <body>
-    <div class="section">
-      <h2>Quote Updates</h2>
+    <div class="section" id="quotes-section">
+      <div class="header">Quote Updates</div>
       <div id="quotes"></div>
     </div>
 
-    <div class="section">
-      <h2>Stock Trades</h2>
+    <div class="section" id="stocks-section">
+      <div class="header">Stock Trades</div>
       <div id="stocks"></div>
     </div>
 
@@ -41,47 +150,161 @@
       const quotesDiv = document.getElementById("quotes");
       const stocksDiv = document.getElementById("stocks");
 
-      // Helper to format timestamp
+      const quoteElements = {};
+      const tradeElements = {};
+
+      // Placeholder logos - update or add symbols as needed
+      const logos = {
+        AAPL: "https://logo.clearbit.com/apple.com",
+        MSFT: "https://logo.clearbit.com/microsoft.com",
+        AMZN: "https://logo.clearbit.com/amazon.com",
+        TSLA: "https://logo.clearbit.com/tesla.com",
+        META: "https://logo.clearbit.com/meta.com",
+        DEFAULT: "https://cdn-icons-png.flaticon.com/512/616/616408.png",
+      };
+
+      function getLogo(symbol) {
+        const baseSymbol = symbol.split(":").pop();
+        return logos[baseSymbol] || logos.DEFAULT;
+      }
+
       function formatTime(ms) {
+        if (!ms) return "N/A";
         const date = new Date(ms);
         return date.toLocaleTimeString();
       }
 
-      // Handle quote updates
-      socket.on("quoteUpdate", (quote) => {
-        console.log("Received quote update", quote);
-        const div = document.createElement("div");
-        div.className = "entry";
-        div.innerHTML = `
-    <strong>Quote for Stock:</strong> ${quote.symbol}<br/>
-    Price: ${quote.price}<br/>
-    Open: ${quote.open}<br/>
-    High: ${quote.high}<br/>
-    Low: ${quote.low}<br/>
-    Previous Close: ${quote.close_previous}<br/>
-    Change: ${quote.change !== null ? quote.change : "N/A"}<br/>
-    Percent Change: ${
-      quote.change_percent !== null ? quote.change_percent + "%" : "N/A"
-    }
-  `;
-        quotesDiv.prepend(div);
-      });
+      function getChangeClass(change) {
+        if (change === null || change === undefined) return "change-neutral";
+        if (change > 0) return "change-positive";
+        if (change < 0) return "change-negative";
+        return "change-neutral";
+      }
 
-      // Handle stock trades
+      // Update or create quote card
+      function createOrUpdateQuote(quote) {
+        const symbol = quote.symbol;
+        let entry = quoteElements[symbol];
+        const changeClass = getChangeClass(quote.change);
+        if (!entry) {
+          entry = document.createElement("div");
+          entry.className = "entry quote";
+          entry.setAttribute("data-symbol", symbol);
+
+          entry.innerHTML = `
+            <div class="symbol-header">
+              <img src="${getLogo(symbol)}" alt="${symbol} logo" class="logo" />
+              <span>${symbol}</span>
+            </div>
+            <div>
+              <div class="price">Price: $<span class="price-value">0</span></div>
+              <div>Open: $<span class="open-value">0</span></div>
+              <div>High: $<span class="high-value">0</span></div>
+              <div>Low: $<span class="low-value">0</span></div>
+              <div>Previous Close: $<span class="prevclose-value">0</span></div>
+              <div class="change-change">Change: <span class="change-value">0</span></div>
+              <div class="change-percent">Percent Change: <span class="percent-value">0%</span></div>
+            </div>
+          `;
+          quotesDiv.prepend(entry);
+          quoteElements[symbol] = entry;
+        }
+        entry.querySelector(".price-value").textContent =
+          quote.price !== undefined && quote.price !== null
+            ? quote.price.toFixed(2)
+            : "N/A";
+        entry.querySelector(".open-value").textContent =
+          quote.open !== undefined && quote.open !== null
+            ? quote.open.toFixed(2)
+            : "N/A";
+        entry.querySelector(".high-value").textContent =
+          quote.high !== undefined && quote.high !== null
+            ? quote.high.toFixed(2)
+            : "N/A";
+        entry.querySelector(".low-value").textContent =
+          quote.low !== undefined && quote.low !== null
+            ? quote.low.toFixed(2)
+            : "N/A";
+        entry.querySelector(".prevclose-value").textContent =
+          quote.close_previous !== undefined && quote.close_previous !== null
+            ? quote.close_previous.toFixed(2)
+            : "N/A";
+
+        const changeContainer = entry.querySelector(".change-change");
+        const percentContainer = entry.querySelector(".change-percent");
+        entry.querySelector(".change-value").textContent =
+          quote.change !== null && quote.change !== undefined
+            ? quote.change.toFixed(2)
+            : "N/A";
+        entry.querySelector(".percent-value").textContent =
+          quote.change_percent !== null && quote.change_percent !== undefined
+            ? quote.change_percent.toFixed(2) + "%"
+            : "N/A";
+
+        // Remove older change classes and add current
+        changeContainer.classList.remove(
+          "change-positive",
+          "change-negative",
+          "change-neutral"
+        );
+        percentContainer.classList.remove(
+          "change-positive",
+          "change-negative",
+          "change-neutral"
+        );
+        changeContainer.classList.add(changeClass);
+        percentContainer.classList.add(changeClass);
+      }
+
+      // Update or create trade card
+      function createOrUpdateTrade(trade) {
+        const symbol = trade.s;
+        let entry = tradeElements[symbol];
+
+        if (!entry) {
+          entry = document.createElement("div");
+          entry.className = "entry trade";
+          entry.setAttribute("data-symbol", symbol);
+
+          entry.innerHTML = `
+            <div class="symbol-header">
+              <img src="${getLogo(symbol)}" alt="${symbol} logo" class="logo" />
+              <span>${symbol}</span>
+            </div>
+            <div>
+              <div>Price: $<span class="price-value">0</span></div>
+              <div>Volume: <span class="volume-value">0</span></div>
+              <div>Time: <span class="time-value">N/A</span></div>
+              <div>Conditions: <span class="cond-value"></span></div>
+            </div>
+          `;
+          stocksDiv.prepend(entry);
+          tradeElements[symbol] = entry;
+        }
+
+        entry.querySelector(".price-value").textContent =
+          trade.p !== undefined && trade.p !== null
+            ? trade.p.toFixed(4)
+            : "N/A";
+        entry.querySelector(".volume-value").textContent =
+          trade.v !== undefined && trade.v !== null
+            ? trade.v.toFixed(0)
+            : "N/A";
+        entry.querySelector(".time-value").textContent = trade.t
+          ? formatTime(trade.t)
+          : "N/A";
+        entry.querySelector(".cond-value").textContent = Array.isArray(trade.c)
+          ? trade.c.join(", ")
+          : "";
+      }
+
+      socket.on("quoteUpdate", createOrUpdateQuote);
+
       socket.on("stockData", (payload) => {
         if (payload && Array.isArray(payload.data)) {
-          payload.data.forEach((trade) => {
-            const div = document.createElement("div");
-            div.className = "entry";
-            div.innerHTML = `
-            <strong>Symbol:</strong> ${trade.s}<br/>
-            <strong>Price:</strong> ${trade.p}<br/>
-            <strong>Volume:</strong> ${trade.v}<br/>
-            <strong>Time:</strong> ${formatTime(trade.t)}<br/>
-            <strong>Conditions:</strong> [${trade.c.join(", ")}]
-          `;
-            stocksDiv.prepend(div);
-          });
+          payload.data.forEach(createOrUpdateTrade);
+        } else if (payload && payload.s) {
+          createOrUpdateTrade(payload);
         }
       });
     </script>
