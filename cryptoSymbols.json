@@ -1,775 +1,5 @@
 [
   {
-    "description": "Binance LISTA/TRY",
-    "displaySymbol": "LISTA/TRY",
-    "symbol": "BINANCE:LISTATRY"
-  },
-  {
-    "description": "Binance WAVES/BNB",
-    "displaySymbol": "WAVES/BNB",
-    "symbol": "BINANCE:WAVESBNB"
-  },
-  {
-    "description": "Binance ADA/PAX",
-    "displaySymbol": "ADA/PAX",
-    "symbol": "BINANCE:ADAPAX"
-  },
-  {
-    "description": "Binance DIA/BUSD",
-    "displaySymbol": "DIA/BUSD",
-    "symbol": "BINANCE:DIABUSD"
-  },
-  {
-    "description": "Binance BIO/USDT",
-    "displaySymbol": "BIO/USDT",
-    "symbol": "BINANCE:BIOUSDT"
-  },
-  {
-    "description": "Binance EPS/USDT",
-    "displaySymbol": "EPS/USDT",
-    "symbol": "BINANCE:EPSUSDT"
-  },
-  {
-    "description": "Binance ROSE/BUSD",
-    "displaySymbol": "ROSE/BUSD",
-    "symbol": "BINANCE:ROSEBUSD"
-  },
-  {
-    "description": "Binance BNB/RUB",
-    "displaySymbol": "BNB/RUB",
-    "symbol": "BINANCE:BNBRUB"
-  },
-  {
-    "description": "Binance OP/BNB",
-    "displaySymbol": "OP/BNB",
-    "symbol": "BINANCE:OPBNB"
-  },
-  {
-    "description": "Binance UNI/USDC",
-    "displaySymbol": "UNI/USDC",
-    "symbol": "BINANCE:UNIUSDC"
-  },
-  {
-    "description": "Binance FTT/BNB",
-    "displaySymbol": "FTT/BNB",
-    "symbol": "BINANCE:FTTBNB"
-  },
-  {
-    "description": "Binance BNB/UAH",
-    "displaySymbol": "BNB/UAH",
-    "symbol": "BINANCE:BNBUAH"
-  },
-  {
-    "description": "Binance ONT/TRY",
-    "displaySymbol": "ONT/TRY",
-    "symbol": "BINANCE:ONTTRY"
-  },
-  {
-    "description": "Binance OCEAN/BNB",
-    "displaySymbol": "OCEAN/BNB",
-    "symbol": "BINANCE:OCEANBNB"
-  },
-  {
-    "description": "Binance ENJ/GBP",
-    "displaySymbol": "ENJ/GBP",
-    "symbol": "BINANCE:ENJGBP"
-  },
-  {
-    "description": "Binance RARE/USDT",
-    "displaySymbol": "RARE/USDT",
-    "symbol": "BINANCE:RAREUSDT"
-  },
-  {
-    "description": "Binance POE/ETH",
-    "displaySymbol": "POE/ETH",
-    "symbol": "BINANCE:POEETH"
-  },
-  {
-    "description": "Binance FUN/BTC",
-    "displaySymbol": "FUN/BTC",
-    "symbol": "BINANCE:FUNBTC"
-  },
-  {
-    "description": "Binance LINK/ETH",
-    "displaySymbol": "LINK/ETH",
-    "symbol": "BINANCE:LINKETH"
-  },
-  {
-    "description": "Binance XAI/USDT",
-    "displaySymbol": "XAI/USDT",
-    "symbol": "BINANCE:XAIUSDT"
-  },
-  {
-    "description": "Binance PROM/BTC",
-    "displaySymbol": "PROM/BTC",
-    "symbol": "BINANCE:PROMBTC"
-  },
-  {
-    "description": "Binance FORTH/USDT",
-    "displaySymbol": "FORTH/USDT",
-    "symbol": "BINANCE:FORTHUSDT"
-  },
-  {
-    "description": "Binance PROM/BUSD",
-    "displaySymbol": "PROM/BUSD",
-    "symbol": "BINANCE:PROMBUSD"
-  },
-  {
-    "description": "Binance ARB/EUR",
-    "displaySymbol": "ARB/EUR",
-    "symbol": "BINANCE:ARBEUR"
-  },
-  {
-    "description": "Binance NAV/BNB",
-    "displaySymbol": "NAV/BNB",
-    "symbol": "BINANCE:NAVBNB"
-  },
-  {
-    "description": "Binance ICX/BTC",
-    "displaySymbol": "ICX/BTC",
-    "symbol": "BINANCE:ICXBTC"
-  },
-  {
-    "description": "Binance 1INCHUP/USDT",
-    "displaySymbol": "1INCHUP/USDT",
-    "symbol": "BINANCE:1INCHUPUSDT"
-  },
-  {
-    "description": "Binance ANIME/USDT",
-    "displaySymbol": "ANIME/USDT",
-    "symbol": "BINANCE:ANIMEUSDT"
-  },
-  {
-    "description": "Binance ETHFI/USDT",
-    "displaySymbol": "ETHFI/USDT",
-    "symbol": "BINANCE:ETHFIUSDT"
-  },
-  {
-    "description": "Binance BOME/FDUSD",
-    "displaySymbol": "BOME/FDUSD",
-    "symbol": "BINANCE:BOMEFDUSD"
-  },
-  {
-    "description": "Binance DAI/USDT",
-    "displaySymbol": "DAI/USDT",
-    "symbol": "BINANCE:DAIUSDT"
-  },
-  {
-    "description": "Binance AIXBT/TRY",
-    "displaySymbol": "AIXBT/TRY",
-    "symbol": "BINANCE:AIXBTTRY"
-  },
-  {
-    "description": "Binance IOTX/USDT",
-    "displaySymbol": "IOTX/USDT",
-    "symbol": "BINANCE:IOTXUSDT"
-  },
-  {
-    "description": "Binance MANTA/USDC",
-    "displaySymbol": "MANTA/USDC",
-    "symbol": "BINANCE:MANTAUSDC"
-  },
-  {
-    "description": "Binance CHZ/BTC",
-    "displaySymbol": "CHZ/BTC",
-    "symbol": "BINANCE:CHZBTC"
-  },
-  {
-    "description": "Binance NEAR/BUSD",
-    "displaySymbol": "NEAR/BUSD",
-    "symbol": "BINANCE:NEARBUSD"
-  },
-  {
-    "description": "Binance LUNA/BTC",
-    "displaySymbol": "LUNA/BTC",
-    "symbol": "BINANCE:LUNABTC"
-  },
-  {
-    "description": "Binance STORM/ETH",
-    "displaySymbol": "STORM/ETH",
-    "symbol": "BINANCE:STORMETH"
-  },
-  {
-    "description": "Binance AEUR/USDT",
-    "displaySymbol": "AEUR/USDT",
-    "symbol": "BINANCE:AEURUSDT"
-  },
-  {
-    "description": "Binance WAVES/USDC",
-    "displaySymbol": "WAVES/USDC",
-    "symbol": "BINANCE:WAVESUSDC"
-  },
-  {
-    "description": "Binance ETHBULL/BUSD",
-    "displaySymbol": "ETHBULL/BUSD",
-    "symbol": "BINANCE:ETHBULLBUSD"
-  },
-  {
-    "description": "Binance CVC/USDC",
-    "displaySymbol": "CVC/USDC",
-    "symbol": "BINANCE:CVCUSDC"
-  },
-  {
-    "description": "Binance LAYER/USDC",
-    "displaySymbol": "LAYER/USDC",
-    "symbol": "BINANCE:LAYERUSDC"
-  },
-  {
-    "description": "Binance SLP/ETH",
-    "displaySymbol": "SLP/ETH",
-    "symbol": "BINANCE:SLPETH"
-  },
-  {
-    "description": "Binance XRP/PAX",
-    "displaySymbol": "XRP/PAX",
-    "symbol": "BINANCE:XRPPAX"
-  },
-  {
-    "description": "Binance OP/TUSD",
-    "displaySymbol": "OP/TUSD",
-    "symbol": "BINANCE:OPTUSD"
-  },
-  {
-    "description": "Binance MITH/BNB",
-    "displaySymbol": "MITH/BNB",
-    "symbol": "BINANCE:MITHBNB"
-  },
-  {
-    "description": "Binance GALA/AUD",
-    "displaySymbol": "GALA/AUD",
-    "symbol": "BINANCE:GALAAUD"
-  },
-  {
-    "description": "Binance PENGU/BNB",
-    "displaySymbol": "PENGU/BNB",
-    "symbol": "BINANCE:PENGUBNB"
-  },
-  {
-    "description": "Binance GLMR/BNB",
-    "displaySymbol": "GLMR/BNB",
-    "symbol": "BINANCE:GLMRBNB"
-  },
-  {
-    "description": "Binance DAR/BTC",
-    "displaySymbol": "DAR/BTC",
-    "symbol": "BINANCE:DARBTC"
-  },
-  {
-    "description": "Binance API3/BUSD",
-    "displaySymbol": "API3/BUSD",
-    "symbol": "BINANCE:API3BUSD"
-  },
-  {
-    "description": "Binance PIVX/USDT",
-    "displaySymbol": "PIVX/USDT",
-    "symbol": "BINANCE:PIVXUSDT"
-  },
-  {
-    "description": "Binance TST/USDT",
-    "displaySymbol": "TST/USDT",
-    "symbol": "BINANCE:TSTUSDT"
-  },
-  {
-    "description": "Binance ZEC/USDC",
-    "displaySymbol": "ZEC/USDC",
-    "symbol": "BINANCE:ZECUSDC"
-  },
-  {
-    "description": "Binance RED/FDUSD",
-    "displaySymbol": "RED/FDUSD",
-    "symbol": "BINANCE:REDFDUSD"
-  },
-  {
-    "description": "Binance ALGO/USDT",
-    "displaySymbol": "ALGO/USDT",
-    "symbol": "BINANCE:ALGOUSDT"
-  },
-  {
-    "description": "Binance AXS/TRY",
-    "displaySymbol": "AXS/TRY",
-    "symbol": "BINANCE:AXSTRY"
-  },
-  {
-    "description": "Binance ALICE/USDT",
-    "displaySymbol": "ALICE/USDT",
-    "symbol": "BINANCE:ALICEUSDT"
-  },
-  {
-    "description": "Binance BTG/ETH",
-    "displaySymbol": "BTG/ETH",
-    "symbol": "BINANCE:BTGETH"
-  },
-  {
-    "description": "Binance IDEX/USDC",
-    "displaySymbol": "IDEX/USDC",
-    "symbol": "BINANCE:IDEXUSDC"
-  },
-  {
-    "description": "Binance JASMY/BUSD",
-    "displaySymbol": "JASMY/BUSD",
-    "symbol": "BINANCE:JASMYBUSD"
-  },
-  {
-    "description": "Binance AUCTION/TRY",
-    "displaySymbol": "AUCTION/TRY",
-    "symbol": "BINANCE:AUCTIONTRY"
-  },
-  {
-    "description": "Binance EIGEN/USDC",
-    "displaySymbol": "EIGEN/USDC",
-    "symbol": "BINANCE:EIGENUSDC"
-  },
-  {
-    "description": "Binance LTC/RUB",
-    "displaySymbol": "LTC/RUB",
-    "symbol": "BINANCE:LTCRUB"
-  },
-  {
-    "description": "Binance JST/BUSD",
-    "displaySymbol": "JST/BUSD",
-    "symbol": "BINANCE:JSTBUSD"
-  },
-  {
-    "description": "Binance STEEM/USDT",
-    "displaySymbol": "STEEM/USDT",
-    "symbol": "BINANCE:STEEMUSDT"
-  },
-  {
-    "description": "Binance TURBO/USDT",
-    "displaySymbol": "TURBO/USDT",
-    "symbol": "BINANCE:TURBOUSDT"
-  },
-  {
-    "description": "Binance HIVE/FDUSD",
-    "displaySymbol": "HIVE/FDUSD",
-    "symbol": "BINANCE:HIVEFDUSD"
-  },
-  {
-    "description": "Binance VIA/BNB",
-    "displaySymbol": "VIA/BNB",
-    "symbol": "BINANCE:VIABNB"
-  },
-  {
-    "description": "Binance GAS/FDUSD",
-    "displaySymbol": "GAS/FDUSD",
-    "symbol": "BINANCE:GASFDUSD"
-  },
-  {
-    "description": "Binance ETH/PAX",
-    "displaySymbol": "ETH/PAX",
-    "symbol": "BINANCE:ETHPAX"
-  },
-  {
-    "description": "Binance 1INCH/BTC",
-    "displaySymbol": "1INCH/BTC",
-    "symbol": "BINANCE:1INCHBTC"
-  },
-  {
-    "description": "Binance AUDIO/BUSD",
-    "displaySymbol": "AUDIO/BUSD",
-    "symbol": "BINANCE:AUDIOBUSD"
-  },
-  {
-    "description": "Binance XEC/BUSD",
-    "displaySymbol": "XEC/BUSD",
-    "symbol": "BINANCE:XECBUSD"
-  },
-  {
-    "description": "Binance INJ/TUSD",
-    "displaySymbol": "INJ/TUSD",
-    "symbol": "BINANCE:INJTUSD"
-  },
-  {
-    "description": "Binance MFT/BNB",
-    "displaySymbol": "MFT/BNB",
-    "symbol": "BINANCE:MFTBNB"
-  },
-  {
-    "description": "Binance MAGIC/BTC",
-    "displaySymbol": "MAGIC/BTC",
-    "symbol": "BINANCE:MAGICBTC"
-  },
-  {
-    "description": "Binance AE/BNB",
-    "displaySymbol": "AE/BNB",
-    "symbol": "BINANCE:AEBNB"
-  },
-  {
-    "description": "Binance BNT/BTC",
-    "displaySymbol": "BNT/BTC",
-    "symbol": "BINANCE:BNTBTC"
-  },
-  {
-    "description": "Binance BONK/BRL",
-    "displaySymbol": "BONK/BRL",
-    "symbol": "BINANCE:BONKBRL"
-  },
-  {
-    "description": "Binance 1INCH/BUSD",
-    "displaySymbol": "1INCH/BUSD",
-    "symbol": "BINANCE:1INCHBUSD"
-  },
-  {
-    "description": "Binance KMD/BTC",
-    "displaySymbol": "KMD/BTC",
-    "symbol": "BINANCE:KMDBTC"
-  },
-  {
-    "description": "Binance OM/BUSD",
-    "displaySymbol": "OM/BUSD",
-    "symbol": "BINANCE:OMBUSD"
-  },
-  {
-    "description": "Binance AI/FDUSD",
-    "displaySymbol": "AI/FDUSD",
-    "symbol": "BINANCE:AIFDUSD"
-  },
-  {
-    "description": "Binance TUSD/TRY",
-    "displaySymbol": "TUSD/TRY",
-    "symbol": "BINANCE:TUSDTRY"
-  },
-  {
-    "description": "Binance VET/BTC",
-    "displaySymbol": "VET/BTC",
-    "symbol": "BINANCE:VETBTC"
-  },
-  {
-    "description": "Binance PNT/USDT",
-    "displaySymbol": "PNT/USDT",
-    "symbol": "BINANCE:PNTUSDT"
-  },
-  {
-    "description": "Binance XTZ/BUSD",
-    "displaySymbol": "XTZ/BUSD",
-    "symbol": "BINANCE:XTZBUSD"
-  },
-  {
-    "description": "Binance GFT/BUSD",
-    "displaySymbol": "GFT/BUSD",
-    "symbol": "BINANCE:GFTBUSD"
-  },
-  {
-    "description": "Binance BNX/BUSD",
-    "displaySymbol": "BNX/BUSD",
-    "symbol": "BINANCE:BNXBUSD"
-  },
-  {
-    "description": "Binance PNT/BTC",
-    "displaySymbol": "PNT/BTC",
-    "symbol": "BINANCE:PNTBTC"
-  },
-  {
-    "description": "Binance TURBO/FDUSD",
-    "displaySymbol": "TURBO/FDUSD",
-    "symbol": "BINANCE:TURBOFDUSD"
-  },
-  {
-    "description": "Binance RAMP/BUSD",
-    "displaySymbol": "RAMP/BUSD",
-    "symbol": "BINANCE:RAMPBUSD"
-  },
-  {
-    "description": "Binance TRIBE/BUSD",
-    "displaySymbol": "TRIBE/BUSD",
-    "symbol": "BINANCE:TRIBEBUSD"
-  },
-  {
-    "description": "Binance SUI/BTC",
-    "displaySymbol": "SUI/BTC",
-    "symbol": "BINANCE:SUIBTC"
-  },
-  {
-    "description": "Binance DYDX/BUSD",
-    "displaySymbol": "DYDX/BUSD",
-    "symbol": "BINANCE:DYDXBUSD"
-  },
-  {
-    "description": "Binance ATOM/BUSD",
-    "displaySymbol": "ATOM/BUSD",
-    "symbol": "BINANCE:ATOMBUSD"
-  },
-  {
-    "description": "Binance AXL/BTC",
-    "displaySymbol": "AXL/BTC",
-    "symbol": "BINANCE:AXLBTC"
-  },
-  {
-    "description": "Binance AUDIO/USDT",
-    "displaySymbol": "AUDIO/USDT",
-    "symbol": "BINANCE:AUDIOUSDT"
-  },
-  {
-    "description": "Binance BNB/AUD",
-    "displaySymbol": "BNB/AUD",
-    "symbol": "BINANCE:BNBAUD"
-  },
-  {
-    "description": "Binance SYS/BNB",
-    "displaySymbol": "SYS/BNB",
-    "symbol": "BINANCE:SYSBNB"
-  },
-  {
-    "description": "Binance USDSB/USDS",
-    "displaySymbol": "USDSB/USDS",
-    "symbol": "BINANCE:USDSBUSDS"
-  },
-  {
-    "description": "Binance DOGS/FDUSD",
-    "displaySymbol": "DOGS/FDUSD",
-    "symbol": "BINANCE:DOGSFDUSD"
-  },
-  {
-    "description": "Binance ANC/BUSD",
-    "displaySymbol": "ANC/BUSD",
-    "symbol": "BINANCE:ANCBUSD"
-  },
-  {
-    "description": "Binance IRIS/USDT",
-    "displaySymbol": "IRIS/USDT",
-    "symbol": "BINANCE:IRISUSDT"
-  },
-  {
-    "description": "Binance UMA/BUSD",
-    "displaySymbol": "UMA/BUSD",
-    "symbol": "BINANCE:UMABUSD"
-  },
-  {
-    "description": "Binance BETH/USDT",
-    "displaySymbol": "BETH/USDT",
-    "symbol": "BINANCE:BETHUSDT"
-  },
-  {
-    "description": "Binance BAT/USDC",
-    "displaySymbol": "BAT/USDC",
-    "symbol": "BINANCE:BATUSDC"
-  },
-  {
-    "description": "Binance TRUMP/USDC",
-    "displaySymbol": "TRUMP/USDC",
-    "symbol": "BINANCE:TRUMPUSDC"
-  },
-  {
-    "description": "Binance GNO/BNB",
-    "displaySymbol": "GNO/BNB",
-    "symbol": "BINANCE:GNOBNB"
-  },
-  {
-    "description": "Binance ETH/DAI",
-    "displaySymbol": "ETH/DAI",
-    "symbol": "BINANCE:ETHDAI"
-  },
-  {
-    "description": "Binance SAND/ETH",
-    "displaySymbol": "SAND/ETH",
-    "symbol": "BINANCE:SANDETH"
-  },
-  {
-    "description": "Binance BCH/TUSD",
-    "displaySymbol": "BCH/TUSD",
-    "symbol": "BINANCE:BCHTUSD"
-  },
-  {
-    "description": "Binance MEME/TUSD",
-    "displaySymbol": "MEME/TUSD",
-    "symbol": "BINANCE:MEMETUSD"
-  },
-  {
-    "description": "Binance PAX/BNB",
-    "displaySymbol": "PAX/BNB",
-    "symbol": "BINANCE:PAXBNB"
-  },
-  {
-    "description": "Binance IMX/BNB",
-    "displaySymbol": "IMX/BNB",
-    "symbol": "BINANCE:IMXBNB"
-  },
-  {
-    "description": "Binance DATA/ETH",
-    "displaySymbol": "DATA/ETH",
-    "symbol": "BINANCE:DATAETH"
-  },
-  {
-    "description": "Binance ACH/TRY",
-    "displaySymbol": "ACH/TRY",
-    "symbol": "BINANCE:ACHTRY"
-  },
-  {
-    "description": "Binance JTO/TRY",
-    "displaySymbol": "JTO/TRY",
-    "symbol": "BINANCE:JTOTRY"
-  },
-  {
-    "description": "Binance BTT/BUSD",
-    "displaySymbol": "BTT/BUSD",
-    "symbol": "BINANCE:BTTBUSD"
-  },
-  {
-    "description": "Binance VTHO/BNB",
-    "displaySymbol": "VTHO/BNB",
-    "symbol": "BINANCE:VTHOBNB"
-  },
-  {
-    "description": "Binance LISTA/USDT",
-    "displaySymbol": "LISTA/USDT",
-    "symbol": "BINANCE:LISTAUSDT"
-  },
-  {
-    "description": "Binance FIL/BUSD",
-    "displaySymbol": "FIL/BUSD",
-    "symbol": "BINANCE:FILBUSD"
-  },
-  {
-    "description": "Binance XUSD/USDT",
-    "displaySymbol": "XUSD/USDT",
-    "symbol": "BINANCE:XUSDUSDT"
-  },
-  {
-    "description": "Binance LDO/USDT",
-    "displaySymbol": "LDO/USDT",
-    "symbol": "BINANCE:LDOUSDT"
-  },
-  {
-    "description": "Binance LDO/TUSD",
-    "displaySymbol": "LDO/TUSD",
-    "symbol": "BINANCE:LDOTUSD"
-  },
-  {
-    "description": "Binance DAR/USDT",
-    "displaySymbol": "DAR/USDT",
-    "symbol": "BINANCE:DARUSDT"
-  },
-  {
-    "description": "Binance MANA/ETH",
-    "displaySymbol": "MANA/ETH",
-    "symbol": "BINANCE:MANAETH"
-  },
-  {
-    "description": "Binance NEO/RUB",
-    "displaySymbol": "NEO/RUB",
-    "symbol": "BINANCE:NEORUB"
-  },
-  {
-    "description": "Binance LTC/TRY",
-    "displaySymbol": "LTC/TRY",
-    "symbol": "BINANCE:LTCTRY"
-  },
-  {
-    "description": "Binance USTC/USDT",
-    "displaySymbol": "USTC/USDT",
-    "symbol": "BINANCE:USTCUSDT"
-  },
-  {
-    "description": "Binance ZEC/TUSD",
-    "displaySymbol": "ZEC/TUSD",
-    "symbol": "BINANCE:ZECTUSD"
-  },
-  {
-    "description": "Binance METIS/BTC",
-    "displaySymbol": "METIS/BTC",
-    "symbol": "BINANCE:METISBTC"
-  },
-  {
-    "description": "Binance ACM/TRY",
-    "displaySymbol": "ACM/TRY",
-    "symbol": "BINANCE:ACMTRY"
-  },
-  {
-    "description": "Binance NMR/BUSD",
-    "displaySymbol": "NMR/BUSD",
-    "symbol": "BINANCE:NMRBUSD"
-  },
-  {
-    "description": "Binance BTC/TRY",
-    "displaySymbol": "BTC/TRY",
-    "symbol": "BINANCE:BTCTRY"
-  },
-  {
-    "description": "Binance NEO/USDC",
-    "displaySymbol": "NEO/USDC",
-    "symbol": "BINANCE:NEOUSDC"
-  },
-  {
-    "description": "Binance ASR/BUSD",
-    "displaySymbol": "ASR/BUSD",
-    "symbol": "BINANCE:ASRBUSD"
-  },
-  {
-    "description": "Binance AUTO/USDT",
-    "displaySymbol": "AUTO/USDT",
-    "symbol": "BINANCE:AUTOUSDT"
-  },
-  {
-    "description": "Binance PEPE/TUSD",
-    "displaySymbol": "PEPE/TUSD",
-    "symbol": "BINANCE:PEPETUSD"
-  },
-  {
-    "description": "Binance AION/BUSD",
-    "displaySymbol": "AION/BUSD",
-    "symbol": "BINANCE:AIONBUSD"
-  },
-  {
-    "description": "Binance TURBO/USDC",
-    "displaySymbol": "TURBO/USDC",
-    "symbol": "BINANCE:TURBOUSDC"
-  },
-  {
-    "description": "Binance GAL/EUR",
-    "displaySymbol": "GAL/EUR",
-    "symbol": "BINANCE:GALEUR"
-  },
-  {
-    "description": "Binance ID/TRY",
-    "displaySymbol": "ID/TRY",
-    "symbol": "BINANCE:IDTRY"
-  },
-  {
-    "description": "Binance CTSI/USDT",
-    "displaySymbol": "CTSI/USDT",
-    "symbol": "BINANCE:CTSIUSDT"
-  },
-  {
-    "description": "Binance QNT/BTC",
-    "displaySymbol": "QNT/BTC",
-    "symbol": "BINANCE:QNTBTC"
-  },
-  {
-    "description": "Binance XRPBEAR/USDT",
-    "displaySymbol": "XRPBEAR/USDT",
-    "symbol": "BINANCE:XRPBEARUSDT"
-  },
-  {
-    "description": "Binance TROY/BUSD",
-    "displaySymbol": "TROY/BUSD",
-    "symbol": "BINANCE:TROYBUSD"
-  },
-  {
-    "description": "Binance BAT/USDT",
-    "displaySymbol": "BAT/USDT",
-    "symbol": "BINANCE:BATUSDT"
-  },
-  {
-    "description": "Binance BOME/TRY",
-    "displaySymbol": "BOME/TRY",
-    "symbol": "BINANCE:BOMETRY"
-  },
-  {
-    "description": "Binance VIB/BUSD",
-    "displaySymbol": "VIB/BUSD",
-    "symbol": "BINANCE:VIBBUSD"
-  },
-  {
-    "description": "Binance STEEM/BUSD",
-    "displaySymbol": "STEEM/BUSD",
-    "symbol": "BINANCE:STEEMBUSD"
-  },
-  {
-    "description": "Binance STMX/USDT",
-    "displaySymbol": "STMX/USDT",
-    "symbol": "BINANCE:STMXUSDT"
-  },
-  {
     "description": "Binance BLUR/USDT",
     "displaySymbol": "BLUR/USDT",
     "symbol": "BINANCE:BLURUSDT"
@@ -15208,5 +14438,775 @@
     "description": "Binance PEPE/TRY",
     "displaySymbol": "PEPE/TRY",
     "symbol": "BINANCE:PEPETRY"
+  },
+  {
+    "description": "Binance LISTA/TRY",
+    "displaySymbol": "LISTA/TRY",
+    "symbol": "BINANCE:LISTATRY"
+  },
+  {
+    "description": "Binance WAVES/BNB",
+    "displaySymbol": "WAVES/BNB",
+    "symbol": "BINANCE:WAVESBNB"
+  },
+  {
+    "description": "Binance ADA/PAX",
+    "displaySymbol": "ADA/PAX",
+    "symbol": "BINANCE:ADAPAX"
+  },
+  {
+    "description": "Binance DIA/BUSD",
+    "displaySymbol": "DIA/BUSD",
+    "symbol": "BINANCE:DIABUSD"
+  },
+  {
+    "description": "Binance BIO/USDT",
+    "displaySymbol": "BIO/USDT",
+    "symbol": "BINANCE:BIOUSDT"
+  },
+  {
+    "description": "Binance EPS/USDT",
+    "displaySymbol": "EPS/USDT",
+    "symbol": "BINANCE:EPSUSDT"
+  },
+  {
+    "description": "Binance ROSE/BUSD",
+    "displaySymbol": "ROSE/BUSD",
+    "symbol": "BINANCE:ROSEBUSD"
+  },
+  {
+    "description": "Binance BNB/RUB",
+    "displaySymbol": "BNB/RUB",
+    "symbol": "BINANCE:BNBRUB"
+  },
+  {
+    "description": "Binance OP/BNB",
+    "displaySymbol": "OP/BNB",
+    "symbol": "BINANCE:OPBNB"
+  },
+  {
+    "description": "Binance UNI/USDC",
+    "displaySymbol": "UNI/USDC",
+    "symbol": "BINANCE:UNIUSDC"
+  },
+  {
+    "description": "Binance FTT/BNB",
+    "displaySymbol": "FTT/BNB",
+    "symbol": "BINANCE:FTTBNB"
+  },
+  {
+    "description": "Binance BNB/UAH",
+    "displaySymbol": "BNB/UAH",
+    "symbol": "BINANCE:BNBUAH"
+  },
+  {
+    "description": "Binance ONT/TRY",
+    "displaySymbol": "ONT/TRY",
+    "symbol": "BINANCE:ONTTRY"
+  },
+  {
+    "description": "Binance OCEAN/BNB",
+    "displaySymbol": "OCEAN/BNB",
+    "symbol": "BINANCE:OCEANBNB"
+  },
+  {
+    "description": "Binance ENJ/GBP",
+    "displaySymbol": "ENJ/GBP",
+    "symbol": "BINANCE:ENJGBP"
+  },
+  {
+    "description": "Binance RARE/USDT",
+    "displaySymbol": "RARE/USDT",
+    "symbol": "BINANCE:RAREUSDT"
+  },
+  {
+    "description": "Binance POE/ETH",
+    "displaySymbol": "POE/ETH",
+    "symbol": "BINANCE:POEETH"
+  },
+  {
+    "description": "Binance FUN/BTC",
+    "displaySymbol": "FUN/BTC",
+    "symbol": "BINANCE:FUNBTC"
+  },
+  {
+    "description": "Binance LINK/ETH",
+    "displaySymbol": "LINK/ETH",
+    "symbol": "BINANCE:LINKETH"
+  },
+  {
+    "description": "Binance XAI/USDT",
+    "displaySymbol": "XAI/USDT",
+    "symbol": "BINANCE:XAIUSDT"
+  },
+  {
+    "description": "Binance PROM/BTC",
+    "displaySymbol": "PROM/BTC",
+    "symbol": "BINANCE:PROMBTC"
+  },
+  {
+    "description": "Binance FORTH/USDT",
+    "displaySymbol": "FORTH/USDT",
+    "symbol": "BINANCE:FORTHUSDT"
+  },
+  {
+    "description": "Binance PROM/BUSD",
+    "displaySymbol": "PROM/BUSD",
+    "symbol": "BINANCE:PROMBUSD"
+  },
+  {
+    "description": "Binance ARB/EUR",
+    "displaySymbol": "ARB/EUR",
+    "symbol": "BINANCE:ARBEUR"
+  },
+  {
+    "description": "Binance NAV/BNB",
+    "displaySymbol": "NAV/BNB",
+    "symbol": "BINANCE:NAVBNB"
+  },
+  {
+    "description": "Binance ICX/BTC",
+    "displaySymbol": "ICX/BTC",
+    "symbol": "BINANCE:ICXBTC"
+  },
+  {
+    "description": "Binance 1INCHUP/USDT",
+    "displaySymbol": "1INCHUP/USDT",
+    "symbol": "BINANCE:1INCHUPUSDT"
+  },
+  {
+    "description": "Binance ANIME/USDT",
+    "displaySymbol": "ANIME/USDT",
+    "symbol": "BINANCE:ANIMEUSDT"
+  },
+  {
+    "description": "Binance ETHFI/USDT",
+    "displaySymbol": "ETHFI/USDT",
+    "symbol": "BINANCE:ETHFIUSDT"
+  },
+  {
+    "description": "Binance BOME/FDUSD",
+    "displaySymbol": "BOME/FDUSD",
+    "symbol": "BINANCE:BOMEFDUSD"
+  },
+  {
+    "description": "Binance DAI/USDT",
+    "displaySymbol": "DAI/USDT",
+    "symbol": "BINANCE:DAIUSDT"
+  },
+  {
+    "description": "Binance AIXBT/TRY",
+    "displaySymbol": "AIXBT/TRY",
+    "symbol": "BINANCE:AIXBTTRY"
+  },
+  {
+    "description": "Binance IOTX/USDT",
+    "displaySymbol": "IOTX/USDT",
+    "symbol": "BINANCE:IOTXUSDT"
+  },
+  {
+    "description": "Binance MANTA/USDC",
+    "displaySymbol": "MANTA/USDC",
+    "symbol": "BINANCE:MANTAUSDC"
+  },
+  {
+    "description": "Binance CHZ/BTC",
+    "displaySymbol": "CHZ/BTC",
+    "symbol": "BINANCE:CHZBTC"
+  },
+  {
+    "description": "Binance NEAR/BUSD",
+    "displaySymbol": "NEAR/BUSD",
+    "symbol": "BINANCE:NEARBUSD"
+  },
+  {
+    "description": "Binance LUNA/BTC",
+    "displaySymbol": "LUNA/BTC",
+    "symbol": "BINANCE:LUNABTC"
+  },
+  {
+    "description": "Binance STORM/ETH",
+    "displaySymbol": "STORM/ETH",
+    "symbol": "BINANCE:STORMETH"
+  },
+  {
+    "description": "Binance AEUR/USDT",
+    "displaySymbol": "AEUR/USDT",
+    "symbol": "BINANCE:AEURUSDT"
+  },
+  {
+    "description": "Binance WAVES/USDC",
+    "displaySymbol": "WAVES/USDC",
+    "symbol": "BINANCE:WAVESUSDC"
+  },
+  {
+    "description": "Binance ETHBULL/BUSD",
+    "displaySymbol": "ETHBULL/BUSD",
+    "symbol": "BINANCE:ETHBULLBUSD"
+  },
+  {
+    "description": "Binance CVC/USDC",
+    "displaySymbol": "CVC/USDC",
+    "symbol": "BINANCE:CVCUSDC"
+  },
+  {
+    "description": "Binance LAYER/USDC",
+    "displaySymbol": "LAYER/USDC",
+    "symbol": "BINANCE:LAYERUSDC"
+  },
+  {
+    "description": "Binance SLP/ETH",
+    "displaySymbol": "SLP/ETH",
+    "symbol": "BINANCE:SLPETH"
+  },
+  {
+    "description": "Binance XRP/PAX",
+    "displaySymbol": "XRP/PAX",
+    "symbol": "BINANCE:XRPPAX"
+  },
+  {
+    "description": "Binance OP/TUSD",
+    "displaySymbol": "OP/TUSD",
+    "symbol": "BINANCE:OPTUSD"
+  },
+  {
+    "description": "Binance MITH/BNB",
+    "displaySymbol": "MITH/BNB",
+    "symbol": "BINANCE:MITHBNB"
+  },
+  {
+    "description": "Binance GALA/AUD",
+    "displaySymbol": "GALA/AUD",
+    "symbol": "BINANCE:GALAAUD"
+  },
+  {
+    "description": "Binance PENGU/BNB",
+    "displaySymbol": "PENGU/BNB",
+    "symbol": "BINANCE:PENGUBNB"
+  },
+  {
+    "description": "Binance GLMR/BNB",
+    "displaySymbol": "GLMR/BNB",
+    "symbol": "BINANCE:GLMRBNB"
+  },
+  {
+    "description": "Binance DAR/BTC",
+    "displaySymbol": "DAR/BTC",
+    "symbol": "BINANCE:DARBTC"
+  },
+  {
+    "description": "Binance API3/BUSD",
+    "displaySymbol": "API3/BUSD",
+    "symbol": "BINANCE:API3BUSD"
+  },
+  {
+    "description": "Binance PIVX/USDT",
+    "displaySymbol": "PIVX/USDT",
+    "symbol": "BINANCE:PIVXUSDT"
+  },
+  {
+    "description": "Binance TST/USDT",
+    "displaySymbol": "TST/USDT",
+    "symbol": "BINANCE:TSTUSDT"
+  },
+  {
+    "description": "Binance ZEC/USDC",
+    "displaySymbol": "ZEC/USDC",
+    "symbol": "BINANCE:ZECUSDC"
+  },
+  {
+    "description": "Binance RED/FDUSD",
+    "displaySymbol": "RED/FDUSD",
+    "symbol": "BINANCE:REDFDUSD"
+  },
+  {
+    "description": "Binance ALGO/USDT",
+    "displaySymbol": "ALGO/USDT",
+    "symbol": "BINANCE:ALGOUSDT"
+  },
+  {
+    "description": "Binance AXS/TRY",
+    "displaySymbol": "AXS/TRY",
+    "symbol": "BINANCE:AXSTRY"
+  },
+  {
+    "description": "Binance ALICE/USDT",
+    "displaySymbol": "ALICE/USDT",
+    "symbol": "BINANCE:ALICEUSDT"
+  },
+  {
+    "description": "Binance BTG/ETH",
+    "displaySymbol": "BTG/ETH",
+    "symbol": "BINANCE:BTGETH"
+  },
+  {
+    "description": "Binance IDEX/USDC",
+    "displaySymbol": "IDEX/USDC",
+    "symbol": "BINANCE:IDEXUSDC"
+  },
+  {
+    "description": "Binance JASMY/BUSD",
+    "displaySymbol": "JASMY/BUSD",
+    "symbol": "BINANCE:JASMYBUSD"
+  },
+  {
+    "description": "Binance AUCTION/TRY",
+    "displaySymbol": "AUCTION/TRY",
+    "symbol": "BINANCE:AUCTIONTRY"
+  },
+  {
+    "description": "Binance EIGEN/USDC",
+    "displaySymbol": "EIGEN/USDC",
+    "symbol": "BINANCE:EIGENUSDC"
+  },
+  {
+    "description": "Binance LTC/RUB",
+    "displaySymbol": "LTC/RUB",
+    "symbol": "BINANCE:LTCRUB"
+  },
+  {
+    "description": "Binance JST/BUSD",
+    "displaySymbol": "JST/BUSD",
+    "symbol": "BINANCE:JSTBUSD"
+  },
+  {
+    "description": "Binance STEEM/USDT",
+    "displaySymbol": "STEEM/USDT",
+    "symbol": "BINANCE:STEEMUSDT"
+  },
+  {
+    "description": "Binance TURBO/USDT",
+    "displaySymbol": "TURBO/USDT",
+    "symbol": "BINANCE:TURBOUSDT"
+  },
+  {
+    "description": "Binance HIVE/FDUSD",
+    "displaySymbol": "HIVE/FDUSD",
+    "symbol": "BINANCE:HIVEFDUSD"
+  },
+  {
+    "description": "Binance VIA/BNB",
+    "displaySymbol": "VIA/BNB",
+    "symbol": "BINANCE:VIABNB"
+  },
+  {
+    "description": "Binance GAS/FDUSD",
+    "displaySymbol": "GAS/FDUSD",
+    "symbol": "BINANCE:GASFDUSD"
+  },
+  {
+    "description": "Binance ETH/PAX",
+    "displaySymbol": "ETH/PAX",
+    "symbol": "BINANCE:ETHPAX"
+  },
+  {
+    "description": "Binance 1INCH/BTC",
+    "displaySymbol": "1INCH/BTC",
+    "symbol": "BINANCE:1INCHBTC"
+  },
+  {
+    "description": "Binance AUDIO/BUSD",
+    "displaySymbol": "AUDIO/BUSD",
+    "symbol": "BINANCE:AUDIOBUSD"
+  },
+  {
+    "description": "Binance XEC/BUSD",
+    "displaySymbol": "XEC/BUSD",
+    "symbol": "BINANCE:XECBUSD"
+  },
+  {
+    "description": "Binance INJ/TUSD",
+    "displaySymbol": "INJ/TUSD",
+    "symbol": "BINANCE:INJTUSD"
+  },
+  {
+    "description": "Binance MFT/BNB",
+    "displaySymbol": "MFT/BNB",
+    "symbol": "BINANCE:MFTBNB"
+  },
+  {
+    "description": "Binance MAGIC/BTC",
+    "displaySymbol": "MAGIC/BTC",
+    "symbol": "BINANCE:MAGICBTC"
+  },
+  {
+    "description": "Binance AE/BNB",
+    "displaySymbol": "AE/BNB",
+    "symbol": "BINANCE:AEBNB"
+  },
+  {
+    "description": "Binance BNT/BTC",
+    "displaySymbol": "BNT/BTC",
+    "symbol": "BINANCE:BNTBTC"
+  },
+  {
+    "description": "Binance BONK/BRL",
+    "displaySymbol": "BONK/BRL",
+    "symbol": "BINANCE:BONKBRL"
+  },
+  {
+    "description": "Binance 1INCH/BUSD",
+    "displaySymbol": "1INCH/BUSD",
+    "symbol": "BINANCE:1INCHBUSD"
+  },
+  {
+    "description": "Binance KMD/BTC",
+    "displaySymbol": "KMD/BTC",
+    "symbol": "BINANCE:KMDBTC"
+  },
+  {
+    "description": "Binance OM/BUSD",
+    "displaySymbol": "OM/BUSD",
+    "symbol": "BINANCE:OMBUSD"
+  },
+  {
+    "description": "Binance AI/FDUSD",
+    "displaySymbol": "AI/FDUSD",
+    "symbol": "BINANCE:AIFDUSD"
+  },
+  {
+    "description": "Binance TUSD/TRY",
+    "displaySymbol": "TUSD/TRY",
+    "symbol": "BINANCE:TUSDTRY"
+  },
+  {
+    "description": "Binance VET/BTC",
+    "displaySymbol": "VET/BTC",
+    "symbol": "BINANCE:VETBTC"
+  },
+  {
+    "description": "Binance PNT/USDT",
+    "displaySymbol": "PNT/USDT",
+    "symbol": "BINANCE:PNTUSDT"
+  },
+  {
+    "description": "Binance XTZ/BUSD",
+    "displaySymbol": "XTZ/BUSD",
+    "symbol": "BINANCE:XTZBUSD"
+  },
+  {
+    "description": "Binance GFT/BUSD",
+    "displaySymbol": "GFT/BUSD",
+    "symbol": "BINANCE:GFTBUSD"
+  },
+  {
+    "description": "Binance BNX/BUSD",
+    "displaySymbol": "BNX/BUSD",
+    "symbol": "BINANCE:BNXBUSD"
+  },
+  {
+    "description": "Binance PNT/BTC",
+    "displaySymbol": "PNT/BTC",
+    "symbol": "BINANCE:PNTBTC"
+  },
+  {
+    "description": "Binance TURBO/FDUSD",
+    "displaySymbol": "TURBO/FDUSD",
+    "symbol": "BINANCE:TURBOFDUSD"
+  },
+  {
+    "description": "Binance RAMP/BUSD",
+    "displaySymbol": "RAMP/BUSD",
+    "symbol": "BINANCE:RAMPBUSD"
+  },
+  {
+    "description": "Binance TRIBE/BUSD",
+    "displaySymbol": "TRIBE/BUSD",
+    "symbol": "BINANCE:TRIBEBUSD"
+  },
+  {
+    "description": "Binance SUI/BTC",
+    "displaySymbol": "SUI/BTC",
+    "symbol": "BINANCE:SUIBTC"
+  },
+  {
+    "description": "Binance DYDX/BUSD",
+    "displaySymbol": "DYDX/BUSD",
+    "symbol": "BINANCE:DYDXBUSD"
+  },
+  {
+    "description": "Binance ATOM/BUSD",
+    "displaySymbol": "ATOM/BUSD",
+    "symbol": "BINANCE:ATOMBUSD"
+  },
+  {
+    "description": "Binance AXL/BTC",
+    "displaySymbol": "AXL/BTC",
+    "symbol": "BINANCE:AXLBTC"
+  },
+  {
+    "description": "Binance AUDIO/USDT",
+    "displaySymbol": "AUDIO/USDT",
+    "symbol": "BINANCE:AUDIOUSDT"
+  },
+  {
+    "description": "Binance BNB/AUD",
+    "displaySymbol": "BNB/AUD",
+    "symbol": "BINANCE:BNBAUD"
+  },
+  {
+    "description": "Binance SYS/BNB",
+    "displaySymbol": "SYS/BNB",
+    "symbol": "BINANCE:SYSBNB"
+  },
+  {
+    "description": "Binance USDSB/USDS",
+    "displaySymbol": "USDSB/USDS",
+    "symbol": "BINANCE:USDSBUSDS"
+  },
+  {
+    "description": "Binance DOGS/FDUSD",
+    "displaySymbol": "DOGS/FDUSD",
+    "symbol": "BINANCE:DOGSFDUSD"
+  },
+  {
+    "description": "Binance ANC/BUSD",
+    "displaySymbol": "ANC/BUSD",
+    "symbol": "BINANCE:ANCBUSD"
+  },
+  {
+    "description": "Binance IRIS/USDT",
+    "displaySymbol": "IRIS/USDT",
+    "symbol": "BINANCE:IRISUSDT"
+  },
+  {
+    "description": "Binance UMA/BUSD",
+    "displaySymbol": "UMA/BUSD",
+    "symbol": "BINANCE:UMABUSD"
+  },
+  {
+    "description": "Binance BETH/USDT",
+    "displaySymbol": "BETH/USDT",
+    "symbol": "BINANCE:BETHUSDT"
+  },
+  {
+    "description": "Binance BAT/USDC",
+    "displaySymbol": "BAT/USDC",
+    "symbol": "BINANCE:BATUSDC"
+  },
+  {
+    "description": "Binance TRUMP/USDC",
+    "displaySymbol": "TRUMP/USDC",
+    "symbol": "BINANCE:TRUMPUSDC"
+  },
+  {
+    "description": "Binance GNO/BNB",
+    "displaySymbol": "GNO/BNB",
+    "symbol": "BINANCE:GNOBNB"
+  },
+  {
+    "description": "Binance ETH/DAI",
+    "displaySymbol": "ETH/DAI",
+    "symbol": "BINANCE:ETHDAI"
+  },
+  {
+    "description": "Binance SAND/ETH",
+    "displaySymbol": "SAND/ETH",
+    "symbol": "BINANCE:SANDETH"
+  },
+  {
+    "description": "Binance BCH/TUSD",
+    "displaySymbol": "BCH/TUSD",
+    "symbol": "BINANCE:BCHTUSD"
+  },
+  {
+    "description": "Binance MEME/TUSD",
+    "displaySymbol": "MEME/TUSD",
+    "symbol": "BINANCE:MEMETUSD"
+  },
+  {
+    "description": "Binance PAX/BNB",
+    "displaySymbol": "PAX/BNB",
+    "symbol": "BINANCE:PAXBNB"
+  },
+  {
+    "description": "Binance IMX/BNB",
+    "displaySymbol": "IMX/BNB",
+    "symbol": "BINANCE:IMXBNB"
+  },
+  {
+    "description": "Binance DATA/ETH",
+    "displaySymbol": "DATA/ETH",
+    "symbol": "BINANCE:DATAETH"
+  },
+  {
+    "description": "Binance ACH/TRY",
+    "displaySymbol": "ACH/TRY",
+    "symbol": "BINANCE:ACHTRY"
+  },
+  {
+    "description": "Binance JTO/TRY",
+    "displaySymbol": "JTO/TRY",
+    "symbol": "BINANCE:JTOTRY"
+  },
+  {
+    "description": "Binance BTT/BUSD",
+    "displaySymbol": "BTT/BUSD",
+    "symbol": "BINANCE:BTTBUSD"
+  },
+  {
+    "description": "Binance VTHO/BNB",
+    "displaySymbol": "VTHO/BNB",
+    "symbol": "BINANCE:VTHOBNB"
+  },
+  {
+    "description": "Binance LISTA/USDT",
+    "displaySymbol": "LISTA/USDT",
+    "symbol": "BINANCE:LISTAUSDT"
+  },
+  {
+    "description": "Binance FIL/BUSD",
+    "displaySymbol": "FIL/BUSD",
+    "symbol": "BINANCE:FILBUSD"
+  },
+  {
+    "description": "Binance XUSD/USDT",
+    "displaySymbol": "XUSD/USDT",
+    "symbol": "BINANCE:XUSDUSDT"
+  },
+  {
+    "description": "Binance LDO/USDT",
+    "displaySymbol": "LDO/USDT",
+    "symbol": "BINANCE:LDOUSDT"
+  },
+  {
+    "description": "Binance LDO/TUSD",
+    "displaySymbol": "LDO/TUSD",
+    "symbol": "BINANCE:LDOTUSD"
+  },
+  {
+    "description": "Binance DAR/USDT",
+    "displaySymbol": "DAR/USDT",
+    "symbol": "BINANCE:DARUSDT"
+  },
+  {
+    "description": "Binance MANA/ETH",
+    "displaySymbol": "MANA/ETH",
+    "symbol": "BINANCE:MANAETH"
+  },
+  {
+    "description": "Binance NEO/RUB",
+    "displaySymbol": "NEO/RUB",
+    "symbol": "BINANCE:NEORUB"
+  },
+  {
+    "description": "Binance LTC/TRY",
+    "displaySymbol": "LTC/TRY",
+    "symbol": "BINANCE:LTCTRY"
+  },
+  {
+    "description": "Binance USTC/USDT",
+    "displaySymbol": "USTC/USDT",
+    "symbol": "BINANCE:USTCUSDT"
+  },
+  {
+    "description": "Binance ZEC/TUSD",
+    "displaySymbol": "ZEC/TUSD",
+    "symbol": "BINANCE:ZECTUSD"
+  },
+  {
+    "description": "Binance METIS/BTC",
+    "displaySymbol": "METIS/BTC",
+    "symbol": "BINANCE:METISBTC"
+  },
+  {
+    "description": "Binance ACM/TRY",
+    "displaySymbol": "ACM/TRY",
+    "symbol": "BINANCE:ACMTRY"
+  },
+  {
+    "description": "Binance NMR/BUSD",
+    "displaySymbol": "NMR/BUSD",
+    "symbol": "BINANCE:NMRBUSD"
+  },
+  {
+    "description": "Binance BTC/TRY",
+    "displaySymbol": "BTC/TRY",
+    "symbol": "BINANCE:BTCTRY"
+  },
+  {
+    "description": "Binance NEO/USDC",
+    "displaySymbol": "NEO/USDC",
+    "symbol": "BINANCE:NEOUSDC"
+  },
+  {
+    "description": "Binance ASR/BUSD",
+    "displaySymbol": "ASR/BUSD",
+    "symbol": "BINANCE:ASRBUSD"
+  },
+  {
+    "description": "Binance AUTO/USDT",
+    "displaySymbol": "AUTO/USDT",
+    "symbol": "BINANCE:AUTOUSDT"
+  },
+  {
+    "description": "Binance PEPE/TUSD",
+    "displaySymbol": "PEPE/TUSD",
+    "symbol": "BINANCE:PEPETUSD"
+  },
+  {
+    "description": "Binance AION/BUSD",
+    "displaySymbol": "AION/BUSD",
+    "symbol": "BINANCE:AIONBUSD"
+  },
+  {
+    "description": "Binance TURBO/USDC",
+    "displaySymbol": "TURBO/USDC",
+    "symbol": "BINANCE:TURBOUSDC"
+  },
+  {
+    "description": "Binance GAL/EUR",
+    "displaySymbol": "GAL/EUR",
+    "symbol": "BINANCE:GALEUR"
+  },
+  {
+    "description": "Binance ID/TRY",
+    "displaySymbol": "ID/TRY",
+    "symbol": "BINANCE:IDTRY"
+  },
+  {
+    "description": "Binance CTSI/USDT",
+    "displaySymbol": "CTSI/USDT",
+    "symbol": "BINANCE:CTSIUSDT"
+  },
+  {
+    "description": "Binance QNT/BTC",
+    "displaySymbol": "QNT/BTC",
+    "symbol": "BINANCE:QNTBTC"
+  },
+  {
+    "description": "Binance XRPBEAR/USDT",
+    "displaySymbol": "XRPBEAR/USDT",
+    "symbol": "BINANCE:XRPBEARUSDT"
+  },
+  {
+    "description": "Binance TROY/BUSD",
+    "displaySymbol": "TROY/BUSD",
+    "symbol": "BINANCE:TROYBUSD"
+  },
+  {
+    "description": "Binance BAT/USDT",
+    "displaySymbol": "BAT/USDT",
+    "symbol": "BINANCE:BATUSDT"
+  },
+  {
+    "description": "Binance BOME/TRY",
+    "displaySymbol": "BOME/TRY",
+    "symbol": "BINANCE:BOMETRY"
+  },
+  {
+    "description": "Binance VIB/BUSD",
+    "displaySymbol": "VIB/BUSD",
+    "symbol": "BINANCE:VIBBUSD"
+  },
+  {
+    "description": "Binance STEEM/BUSD",
+    "displaySymbol": "STEEM/BUSD",
+    "symbol": "BINANCE:STEEMBUSD"
+  },
+  {
+    "description": "Binance STMX/USDT",
+    "displaySymbol": "STMX/USDT",
+    "symbol": "BINANCE:STMXUSDT"
   }
 ]

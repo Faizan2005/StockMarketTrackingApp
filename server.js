@@ -8,6 +8,8 @@ const finnhub = require("finnhub");
 const fs = require("fs");
 const redis = require("./redisClient");
 const ms = require("ms");
+const Quote = require("./models/schema");
+const connectDB = require("./models/storage");
 
 const app = express();
 const server = http.createServer(app);
@@ -44,7 +46,9 @@ try {
   );
   console.log("[Startup] Last stock timestamp loaded:", lastStockTimestamp);
 } catch (e) {
-  console.warn("[Startup] stockTimestamp.json not found or invalid, proceeding with fetch.");
+  console.warn(
+    "[Startup] stockTimestamp.json not found or invalid, proceeding with fetch."
+  );
 }
 
 if (shouldFetch("timestamp.json")) {
@@ -108,7 +112,7 @@ socket.on("open", () => {
 
   try {
     stockSymbols = JSON.parse(fs.readFileSync("stockSymbols.json", "utf-8"))
-      .slice(0, 5)
+      //.slice(0, 5)
       .map((entry) => entry.symbol);
     console.log("[WebSocket] Loaded stock symbols:", stockSymbols);
   } catch (e) {
@@ -117,7 +121,7 @@ socket.on("open", () => {
 
   try {
     cryptoSymbols = JSON.parse(fs.readFileSync("cryptoSymbols.json", "utf-8"))
-      .slice(0, 5)
+      // .slice(0, 5)
       .map((entry) => entry.symbol);
     console.log("[WebSocket] Loaded crypto symbols:", cryptoSymbols);
   } catch (e) {
@@ -139,7 +143,7 @@ socket.on("message", (msg) => {
   console.log("[WebSocket] Received message.");
   try {
     const data = JSON.parse(msg);
-    console.log(data)
+    console.log(data);
     if (data.type === "trade") {
       console.log("[WebSocket] Trade data received, emitting to clients.");
       io.emit("stockData", data);
@@ -154,14 +158,24 @@ socket.on("error", (err) => {
 });
 
 socket.on("close", (code, reason) => {
-  console.warn(`[WebSocket] Connection closed. Code: ${code}, Reason: ${reason}`);
+  console.warn(
+    `[WebSocket] Connection closed. Code: ${code}, Reason: ${reason}`
+  );
 });
 
 const PORT = process.env.PORT || 8000;
-server.listen(PORT, () => {
-  console.log(`[Server] Listening on port ${PORT}`);
-  console.log(`[Server] Visit: http://localhost:${PORT}`);
-});
+
+connectDB()
+  .then(() => {
+    server.listen(PORT, () => {
+      console.log(`[Server] Listening on port ${PORT}`);
+      console.log(`[Server] Visit: http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("[MongoDB] Connection error:", err);
+    process.exit(1);
+  });
 
 // API endpoints
 app.get("/symbols/stocks", (req, res) => {
@@ -190,16 +204,26 @@ app.get("/symbols/crypto", (req, res) => {
   }
 });
 
+app.get("/history/:symbol", async (req, res) => {
+  const { symbol } = req.params;
+
+  const data = await Quote.find({ symbol })
+    .sort({ timestamp: 1 }) // ascending by time
+    .limit(100); // adjust as needed
+
+  res.json(data);
+});
+
 // Quote polling
 async function fetchQuote(symbol) {
   return new Promise((resolve, reject) => {
-    finnhubClient.quote(symbol, (error, data) => {
+    finnhubClient.quote(symbol, async (error, data) => {
       if (error) {
         console.error(`[Quote] Error fetching ${symbol}:`, error);
         return reject(error);
       }
-      console.log(`[Quote] Fetched quote for ${symbol}:`, data);
-      resolve({
+
+      const quote = {
         price: data.c,
         change: data.d,
         change_percent: data.dp,
@@ -207,8 +231,21 @@ async function fetchQuote(symbol) {
         high: data.h,
         low: data.l,
         close_previous: data.pc,
-        timeStamp: data.t,
-      });
+        timeStamp: new Date(),
+      };
+
+      console.log(`[Quote] Fetched quote for ${symbol}:`, quote);
+
+      // Save to MongoDB
+      try {
+        const newQuote = new Quote({ symbol, ...quote });
+        await newQuote.save();
+        console.log(`[MongoDB] Saved quote for ${symbol}`);
+      } catch (err) {
+        console.error(`[MongoDB] Error saving quote for ${symbol}:`, err);
+      }
+
+      resolve(quote);
     });
   });
 }
@@ -220,7 +257,9 @@ function initQuotePolling(symbols, interval) {
         const quote = await fetchQuote(symbol);
         const cache = await redis.get(symbol);
         if (JSON.stringify(quote) !== JSON.stringify(cache)) {
-          console.log(`[Polling] Quote changed for ${symbol}, emitting update.`);
+          console.log(
+            `[Polling] Quote changed for ${symbol}, emitting update.`
+          );
           io.emit("quoteUpdate", { symbol, ...quote });
           await redis.set(symbol, JSON.stringify(quote), "EX", 10);
         } else {
