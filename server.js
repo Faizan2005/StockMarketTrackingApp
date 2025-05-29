@@ -165,17 +165,10 @@ socket.on("close", (code, reason) => {
 
 const PORT = process.env.PORT || 8000;
 
-connectDB()
-  .then(() => {
-    server.listen(PORT, () => {
-      console.log(`[Server] Listening on port ${PORT}`);
-      console.log(`[Server] Visit: http://localhost:${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.error("[MongoDB] Connection error:", err);
-    process.exit(1);
-  });
+server.listen(PORT, () => {
+  console.log(`[Server] Listening on port ${PORT}`);
+  console.log(`[Server] Visit: http://localhost:${PORT}`);
+});
 
 // API endpoints
 app.get("/symbols/stocks", (req, res) => {
