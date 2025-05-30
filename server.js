@@ -9,7 +9,7 @@ const fs = require("fs");
 const redis = require("./redisClient");
 const ms = require("ms");
 const Quote = require("./models/schema");
-const connectDB = require("./models/storage");
+const pool = require("./models/storage");
 
 const app = express();
 const server = http.createServer(app);
@@ -206,6 +206,69 @@ app.get("/history/:symbol", async (req, res) => {
 
   res.json(data);
 });
+
+app.post("/watchlist/add", async (req, res) => {
+  const userID = req.user.id;
+  const { symbol } = req.body;
+
+  try {
+    await pool.query(
+      "INSERT INTO watchlists (user_id, stock_symbol) VALUES ($1, $2) ON CONFLICT DO NOTHING",
+      [userID, symbol]
+    );
+
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
+app.post("/watchlist/remove", async (req, res) => {
+  const userID = req.user.id;
+  const { symbol } = req.body;
+
+  try {
+    await pool.query(
+      "DELETE FROM watchlists WHERE user_id=$1 AND stock_symbol=$2",
+      [userID, symbol]
+    );
+
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
+app.get("/watchlist", async (req, res) => {
+  const userID = req.user.id;
+
+  try {
+    const result = await pool.query(
+      "SELECT stock_symbols FROM watchlists WHERE users=$1", [userID]
+    )
+
+    const symbols = result.rows.map(r => r.stock_symbol)
+
+    
+
+
+
+
+
+
+  }
+
+
+
+
+})
+
+
+
+
+
 
 // Quote polling
 async function fetchQuote(symbol) {
