@@ -8,12 +8,30 @@ const finnhub = require("finnhub");
 const fs = require("fs");
 const redis = require("./redisClient");
 const ms = require("ms");
-const Quote = require("./models/schema");
+// REMOVED: const Quote = require("./models/schema"); // Removed MongoDB model import
 const pool = require("./models/storage");
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+
+// --- Database Connection Test and Log ---
+pool.query('SELECT NOW()', (err, res) => {
+  if (err) {
+    console.error('[Database] Connection Test FAILED:', err.stack);
+    // Consider exiting the process if database is critical and not connected
+    // process.exit(1);
+  } else {
+    console.log('[Database] Connected to PostgreSQL! Current DB time:', res.rows[0].now);
+  }
+});
+
+pool.on('error', (err) => {
+    console.error('[Database] Unexpected error on idle client', err);
+    // It's often good practice to exit if the main database pool has a critical error
+    // process.exit(-1);
+});
+// --- End Database Connection Test and Log ---
 
 const DAY_MS = 86400000;
 
@@ -29,6 +47,8 @@ if (!FINNHUB_API_KEY) {
 // WebSocket connection to Finnhub
 const socket = new WebSocket(FINNHUB_API_URL);
 
+// Middleware to parse JSON body for API requests
+app.use(express.json());
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -112,7 +132,7 @@ socket.on("open", () => {
 
   try {
     stockSymbols = JSON.parse(fs.readFileSync("stockSymbols.json", "utf-8"))
-      //.slice(0, 5)
+      .slice(0, 5) // UNCOMMENTED THIS LINE to limit symbols
       .map((entry) => entry.symbol);
     console.log("[WebSocket] Loaded stock symbols:", stockSymbols);
   } catch (e) {
@@ -121,7 +141,7 @@ socket.on("open", () => {
 
   try {
     cryptoSymbols = JSON.parse(fs.readFileSync("cryptoSymbols.json", "utf-8"))
-      // .slice(0, 5)
+      .slice(0, 5) // UNCOMMENTED THIS LINE to limit symbols
       .map((entry) => entry.symbol);
     console.log("[WebSocket] Loaded crypto symbols:", cryptoSymbols);
   } catch (e) {
@@ -147,6 +167,10 @@ socket.on("message", (msg) => {
     if (data.type === "trade") {
       console.log("[WebSocket] Trade data received, emitting to clients.");
       io.emit("stockData", data);
+    } else if (data.type === "ping") {
+        console.log("[WebSocket] Received Finnhub ping.");
+    } else {
+        console.log(`[WebSocket] Received other message type: ${data.type}`);
     }
   } catch (err) {
     console.error("[WebSocket] Message parse error:", err);
@@ -170,7 +194,14 @@ server.listen(PORT, () => {
   console.log(`[Server] Visit: http://localhost:${PORT}`);
 });
 
-// API endpoints
+// --- API endpoints ---
+
+// Ensure this middleware is defined earlier in your server.js, before your routes
+const simulateAuth = (req, res, next) => {
+    req.userId = 1234; // Hardcoded dummy user ID for now
+    next();
+};
+
 app.get("/symbols/stocks", (req, res) => {
   try {
     const stockSymbols = JSON.parse(
@@ -197,78 +228,98 @@ app.get("/symbols/crypto", (req, res) => {
   }
 });
 
-app.get("/history/:symbol", async (req, res) => {
-  const { symbol } = req.params;
+// REMOVED: app.get("/history/:symbol", async (req, res) => { ... }); // Removed MongoDB history endpoint
 
-  const data = await Quote.find({ symbol })
-    .sort({ timestamp: 1 }) // ascending by time
-    .limit(100); // adjust as needed
-
-  res.json(data);
-});
-
-app.post("/watchlist/add", async (req, res) => {
-  const userID = req.user.id;
+app.post("/watchlist/add", simulateAuth, async (req, res) => {
+  const userID = req.userId;
   const { symbol } = req.body;
+
+  if (!symbol) {
+    return res.status(400).json({ error: 'Symbol is required' });
+  }
 
   try {
     await pool.query(
-      "INSERT INTO watchlists (user_id, stock_symbol) VALUES ($1, $2) ON CONFLICT DO NOTHING",
+      "INSERT INTO watchlists (user_id, stock_symbol) VALUES ($1, $2) ON CONFLICT (user_id, stock_symbol) DO NOTHING",
       [userID, symbol]
     );
-
-    res.sendStatus(200);
+    console.log(`[Watchlist] ${symbol} added for user ${userID}.`);
+    res.status(200).json({ message: `${symbol} added to watchlist` });
   } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
+    console.error(`[Watchlist] Error adding ${symbol} for user ${userID}:`, err);
+    res.status(500).json({ error: "Failed to add to watchlist." });
   }
 });
 
-app.post("/watchlist/remove", async (req, res) => {
-  const userID = req.user.id;
+app.post("/watchlist/remove", simulateAuth, async (req, res) => {
+  const userID = req.userId;
   const { symbol } = req.body;
+
+  if (!symbol) {
+    return res.status(400).json({ error: 'Symbol is required' });
+  }
 
   try {
     await pool.query(
       "DELETE FROM watchlists WHERE user_id=$1 AND stock_symbol=$2",
       [userID, symbol]
     );
-
-    res.sendStatus(200);
+    console.log(`[Watchlist] ${symbol} removed for user ${userID}.`);
+    res.status(200).json({ message: `${symbol} removed from watchlist` });
   } catch (err) {
-    console.error(err);
-    res.sendStatus(500);
+    console.error(`[Watchlist] Error removing ${symbol} for user ${userID}:`, err);
+    res.status(500).json({ error: "Failed to remove from watchlist." });
   }
 });
 
-app.get("/watchlist", async (req, res) => {
-  const userID = req.user.id;
+app.get("/watchlist", simulateAuth, async (req, res) => {
+  const userID = req.userId;
 
   try {
     const result = await pool.query(
-      "SELECT stock_symbols FROM watchlists WHERE users=$1", [userID]
-    )
+      "SELECT stock_symbol FROM watchlists WHERE user_id=$1",
+      [userID]
+    );
 
-    const symbols = result.rows.map(r => r.stock_symbol)
+    const watchlistSymbols = result.rows.map(row => row.stock_symbol);
 
-    
+    console.log(
+      `[Watchlist] User ${userID} watchlist symbols:`,
+      watchlistSymbols
+    );
 
+    const watchlistQuotes = [];
 
+    for (const symbol of watchlistSymbols) {
+      try {
+        const cacheData = await redis.get(symbol);
+        let quoteData;
 
+        if (cacheData) {
+          quoteData = JSON.parse(cacheData);
+          console.log(`[Watchlist] Fetched ${symbol} from Redis cache.`);
+        } else {
+          quoteData = await fetchQuote(symbol);
+          await redis.set(symbol, JSON.stringify(quoteData), "EX", 10);
+          console.log(`[Watchlist] Fetched ${symbol} from Finnhub and cached.`);
+        }
 
+        watchlistQuotes.push({ symbol, ...quoteData });
+      } catch (err) {
+        console.error(`[Watchlist] Error fetching quote for ${symbol}:`, err);
+        watchlistQuotes.push({ symbol: symbol, price: 'N/A', change: 'N/A', change_percent: 'N/A', open: 'N/A', high: 'N/A', low: 'N/A', close_previous: 'N/A' });
+      }
+    }
 
-
+    res.status(200).json(watchlistQuotes);
+  } catch (err) {
+    console.error(
+      `[Watchlist] Error fetching user ${userID}'s watchlist:`,
+      err
+    );
+    res.status(500).json({ error: "Failed to retrieve watchlist" });
   }
-
-
-
-
-})
-
-
-
-
-
+});
 
 // Quote polling
 async function fetchQuote(symbol) {
@@ -292,14 +343,10 @@ async function fetchQuote(symbol) {
 
       console.log(`[Quote] Fetched quote for ${symbol}:`, quote);
 
-      // Save to MongoDB
-      try {
-        const newQuote = new Quote({ symbol, ...quote });
-        await newQuote.save();
-        console.log(`[MongoDB] Saved quote for ${symbol}`);
-      } catch (err) {
-        console.error(`[MongoDB] Error saving quote for ${symbol}:`, err);
-      }
+      // REMOVED: MongoDB Save - This part is removed as requested
+      // No longer saving to MongoDB
+      // console.log(`[MongoDB] Saved quote for ${symbol}`); // Removed log
+      // console.error(`[MongoDB] Error saving quote for ${symbol}:`, err); // Removed log
 
       resolve(quote);
     });

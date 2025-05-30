@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Watchlist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <h1 class="app-title">Stock Tracker</h1>
+      <nav>
+        <button onclick="window.location.href='index.html'" class="nav-button">Home</button>
+      </nav>
+    </header>
+
+    <main class="watchlist-container">
+      <h2>My Watchlist</h2>
+      <div class="stock-list-container">
+        <table>
+          <thead>
+            <tr>
+              <th></th> <th>#</th>
+              <th>Stocks/Crypto</th>
+              <th>Price</th>
+              <th>Change</th>
+              <th>% Change</th>
+              <th>Open</th>
+              <th>High</th>
+              <th>Low</th>
+              <th>Prev. Close</th>
+            </tr>
+          </thead>
+          <tbody id="watchlist-table-body">
+            </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="watchlist.js"></script> </body>
+</html>

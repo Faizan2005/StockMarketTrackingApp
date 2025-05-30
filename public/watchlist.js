@@ -1,8 +1,9 @@
 const socket = io();
 
-const stockTableBody = document.getElementById("stock-table-body");
-const watchlistButton = document.getElementById("watchlist-button");
-const searchInput = document.getElementById("search-input");
+// Ensure stockTableBody correctly points to the table body in watchlist.html
+// In watchlist.html, the tbody ID is 'watchlist-table-body'.
+// If watchlist.js is meant to be the script for watchlist.html, it should target that ID.
+const stockTableBody = document.getElementById("watchlist-table-body"); 
 
 let userWatchlist = new Set(); // Start with an empty watchlist
 
@@ -157,10 +158,10 @@ function sortStocks(a, b) {
 function renderTable() {
   let stocksArray = Object.values(stockDisplayData);
 
-  const searchTerm = searchInput.value.toLowerCase();
-  if (searchTerm) {
-    stocksArray = stocksArray.filter(stock => getDisplaySymbol(stock.symbol).toLowerCase().includes(searchTerm));
-  }
+  // Filter to only show stocks that are actually in the user's watchlist
+  // This is crucial for the watchlist page
+  stocksArray = stocksArray.filter(stock => userWatchlist.has(stock.symbol));
+
 
   stocksArray.sort(sortStocks);
 
@@ -179,27 +180,10 @@ function renderTable() {
     const isAddedToWatchlist = userWatchlist.has(stock.symbol);
     const watchlistEmojiClass = isAddedToWatchlist ? "added" : "not-added";
 
-    row.innerHTML = `
-        <td><span class="watchlist-toggle-emoji ${watchlistEmojiClass}">&#x2714;</span></td> <td class="stock-index">${index + 1}</td>
-        <td>
-          <img src="${getLogo(stock.symbol)}" alt="${displaySymbol} logo" class="logo" />
-          ${displaySymbol} </td>
-        <td class="price-value">$<span>N/A</span></td>
-        <td class="change-value-cell"><span>N/A</span></td>
-        <td class="change-percent-cell"><span>N/A</span></td>
-        <td>$<span class="open-value">N/A</span></td>
-        <td>$<span class="high-value">N/A</span></td>
-        <td>$<span class="low-value">N/A</span></td>
-        <td>$<span class="prevclose-value">N/A</span></td>
-      `;
-    
-    // Add event listener for the watchlist emoji
-    const emojiSpan = row.querySelector(".watchlist-toggle-emoji");
-    emojiSpan.addEventListener("click", () => toggleWatchlist(stock.symbol, emojiSpan));
-
-    // Update the data in the row
+    // Prepare data for display
     const currentData = stockDisplayData[stock.symbol]; // Ensure we get the latest data
     
+    // Check for null/undefined/NaN values before formatting
     const price = currentData.price !== undefined && currentData.price !== null && !isNaN(currentData.price) ? currentData.price.toFixed(2) : "N/A";
     const change = currentData.change !== undefined && currentData.change !== null && !isNaN(currentData.change) ? currentData.change.toFixed(2) : "N/A";
     const changePercent = currentData.change_percent !== undefined && currentData.change_percent !== null && !isNaN(currentData.change_percent) ? currentData.change_percent.toFixed(2) + "%" : "N/A";
@@ -208,34 +192,29 @@ function renderTable() {
     const low = currentData.low !== undefined && currentData.low !== null && !isNaN(currentData.low) ? currentData.low.toFixed(2) : "N/A";
     const prevClose = currentData.close_previous !== undefined && currentData.close_previous !== null && !isNaN(currentData.close_previous) ? currentData.close_previous.toFixed(2) : "N/A";
 
-    row.querySelector(".price-value span").textContent = price;
+    // Determine change class directly for both change and percent cells
+    const changeClass = getChangeClass(currentData.change);
 
-    const changeValueCell = row.querySelector(".change-value-cell");
-    const percentValueCell = row.querySelector(".change-percent-cell");
-
-    changeValueCell.classList.remove("change-positive", "change-negative", "change-neutral");
-    percentValueCell.classList.remove("change-positive", "change-negative", "change-neutral");
-
-    if (currentData.change !== undefined && currentData.change !== null && !isNaN(currentData.change)) {
-      changeValueCell.querySelector("span").textContent = change;
-      changeValueCell.classList.add(getChangeClass(currentData.change));
-    } else {
-      changeValueCell.querySelector("span").textContent = "N/A";
-      changeValueCell.classList.add("change-neutral");
-    }
-
-    if (currentData.change_percent !== undefined && currentData.change_percent !== null && !isNaN(currentData.change_percent)) {
-      percentValueCell.querySelector("span").textContent = changePercent;
-      percentValueCell.classList.add(getChangeClass(currentData.change));
-    } else {
-      percentValueCell.querySelector("span").textContent = "N/A";
-      percentValueCell.classList.add("change-neutral");
-    }
-
-    row.querySelector(".open-value").textContent = open;
-    row.querySelector(".high-value").textContent = high;
-    row.querySelector(".low-value").textContent = low;
-    row.querySelector(".prevclose-value").textContent = prevClose;
+    // Set innerHTML directly with the formatted values
+    row.innerHTML = `
+        <td><span class="watchlist-toggle-emoji ${watchlistEmojiClass}">&#x2714;</span></td>
+        <td class="stock-index">${index + 1}</td>
+        <td>
+          <img src="${getLogo(stock.symbol)}" alt="${displaySymbol} logo" class="logo" />
+          ${displaySymbol}
+        </td>
+        <td class="price-value">$<span>${price}</span></td>
+        <td class="change-value-cell"><span class="${changeClass}">${change}</span></td>
+        <td class="change-percent-cell"><span class="${changeClass}">${changePercent}</span></td>
+        <td>$<span class="open-value">${open}</span></td>
+        <td>$<span class="high-value">${high}</span></td>
+        <td>$<span class="low-value">${low}</span></td>
+        <td>$<span class="prevclose-value">${prevClose}</span></td>
+      `;
+    
+    // Add event listener for the watchlist emoji
+    const emojiSpan = row.querySelector(".watchlist-toggle-emoji");
+    emojiSpan.addEventListener("click", () => toggleWatchlist(stock.symbol, emojiSpan));
     
     // Append the row to the table body after all its content is set
     stockTableBody.appendChild(row);
@@ -258,67 +237,69 @@ async function toggleWatchlist(symbol, emojiSpan) {
     });
 
     if (response.ok) {
-      if (isCurrentlyInWatchlist) { // Note: isCurrentlyInWatchlist is local state
+      if (isCurrentlyInWatchlist) {
         userWatchlist.delete(symbol);
         emojiSpan.classList.remove("added");
         emojiSpan.classList.add("not-added");
-        console.log(`Successfully removed ${symbol} from watchlist (backend and local)`);
+        console.log(`Successfully removed ${symbol} from watchlist`);
       } else {
         userWatchlist.add(symbol);
         emojiSpan.classList.remove("not-added");
         emojiSpan.classList.add("added");
-        console.log(`Successfully added ${symbol} to watchlist (backend and local)`);
+        console.log(`Successfully added ${symbol} to watchlist`);
       }
-      // You might want to re-render the main table here as well if needed
-      // renderTable(); // Uncomment if you want immediate visual update on main page
+      // Re-render the table to reflect the updated watchlist status for all symbols
+      // On the watchlist page, this will filter to only show actual watchlist items
+      renderTable(); 
     } else {
       const errorData = await response.json();
       console.error(`Failed to toggle watchlist for ${symbol}:`, errorData.error);
       alert(`Error: ${errorData.error || "Could not update watchlist."}`);
-      // Revert local state if backend call failed
-      if (isCurrentlyInWatchlist) {
-          userWatchlist.add(symbol); // Add back if it was removed
-          emojiSpan.classList.add("added");
-          emojiSpan.classList.remove("not-added");
-      } else {
-          userWatchlist.delete(symbol); // Remove if it was added
-          emojiSpan.classList.remove("added");
-          emojiSpan.classList.add("not-added");
-      }
     }
   } catch (error) {
     console.error(`Network error toggling watchlist for ${symbol}:`, error);
     alert("A network error occurred. Could not update watchlist.");
-    // Revert local state if network call failed
-    if (isCurrentlyInWatchlist) {
-        userWatchlist.add(symbol);
-        emojiSpan.classList.add("added");
-        emojiSpan.classList.remove("not-added");
-    } else {
-        userWatchlist.delete(symbol);
-        emojiSpan.classList.remove("added");
-        emojiSpan.classList.add("not-added");
-    }
   }
 }
 
-// Event listener for the Watchlist button
-watchlistButton.addEventListener("click", () => {
-  window.location.href = 'watchlist.html'; // This line will navigate to the watchlist.html page
-});
+// Function to fetch initial watchlist from the backend
+async function fetchWatchlist() {
+  try {
+    const response = await fetch("/watchlist");
+    if (response.ok) {
+      const watchlistQuotes = await response.json();
+      // Populate userWatchlist Set with symbols from the fetched watchlist
+      userWatchlist = new Set(watchlistQuotes.map(item => item.symbol));
+      console.log("Initial watchlist fetched:", userWatchlist);
 
-// Event listener for search input
-searchInput.addEventListener("input", () => {
-    renderTable(); // Re-render table on search input to apply filter and sort
-});
+      // Populate stockDisplayData with initial watchlist quotes
+      watchlistQuotes.forEach(quote => {
+        stockDisplayData[quote.symbol] = quote;
+      });
+
+      renderTable(); // Render the table with initial watchlist data and correct checkmarks
+    } else {
+      const errorData = await response.json();
+      console.error("Failed to fetch initial watchlist:", errorData.error);
+      // Optionally, alert the user or show a message
+    }
+  } catch (error) {
+    console.error("Network error fetching initial watchlist:", error);
+    // Optionally, alert the user or show a message
+  }
+}
+
+// Removed watchlistButton event listener as it belongs to index.html's script.
+// Removed searchInput variable and its event listener as it belongs to index.html's script.
 
 // Socket.IO listener for quote updates
 socket.on("quoteUpdate", (quote) => {
     console.log("Received quote:", quote);
-    if (quote && quote.symbol) {
+    if (quote && quote.symbol && userWatchlist.has(quote.symbol)) { // Only update if symbol is in watchlist
         stockDisplayData[quote.symbol] = { ...stockDisplayData[quote.symbol], ...quote };
         renderTable(); // Re-render table on every quote update
     }
 });
 
-// Initial (empty) state: The table will be empty until your server sends the first quoteUpdate.
+// Call fetchWatchlist when the page loads to initialize the userWatchlist
+document.addEventListener("DOMContentLoaded", fetchWatchlist);

@@ -73,6 +73,42 @@ body {
   color: #888888;
 }
 
+/* Watchlist Container specific styles */
+.watchlist-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: #111111; /* Dark background to match theme */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Darker shadow for dark theme */
+}
+
+.watchlist-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff; /* White text for headings */
+}
+
+.back-button {
+  display: block;
+  width: fit-content;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #2575FC; /* Blue from your header gradient */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #1a5acb; /* Darker blue on hover */
+}
+
+
 /* Stock List Container (Table) */
 .stock-list-container {
   flex-grow: 1;
