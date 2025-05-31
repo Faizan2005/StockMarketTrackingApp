@@ -216,3 +216,46 @@ tbody td {
   border-radius: 10px;
   border: 3px solid #222;
 }
+
+/* Login Page Specific Styles */
+.login-container {
+  flex-grow: 1; /* Allows it to take available space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  text-align: center;
+  padding: 20px;
+  max-width: 600px; /* Limit width for better readability */
+  margin: 50px auto; /* Add margin to separate from header/footer */
+  background-color: #1a1a1a; /* Darker background for the login box */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Prominent shadow */
+}
+
+.login-container h2 {
+  font-size: 2.2em;
+  margin-bottom: 15px;
+  color: #ffffff; /* White text for heading */
+}
+
+.login-container p {
+  font-size: 1.1em;
+  margin-bottom: 30px;
+  color: #cccccc; /* Lighter grey for paragraph text */
+}
+
+.login-google-button {
+  /* Inherits .nav-button styles, but we can add specific ones */
+  padding: 12px 25px;
+  font-size: 1.1em;
+  min-width: 200px; /* Ensure button has a good minimum width */
+  text-decoration: none; /* Remove underline from <a> */
+  display: inline-block; /* Allow padding/width for <a> as button */
+}
+
+/* Re-using .nav-button:hover for login-google-button */
+.login-google-button:hover {
+    background-color: #e0e0e0;
+    color: #000000;
+}

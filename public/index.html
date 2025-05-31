@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Stock Tracker Dashboard</title>
+    <title>Stock Tracker</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -10,24 +10,25 @@
     <header class="main-header">
       <h1 class="app-title">Stock Tracker</h1>
       <nav>
-        <button id="watchlist-button" class="nav-button">Watchlist</button>
+        <button id="my-watchlist-button" class="nav-button">My Watchlist</button>
+    <a href="/auth/logout" class="nav-button">Sign Out</a>
       </nav>
     </header>
 
-    <main class="dashboard-container">
-      <div class="search-section">
-        <input type="text" id="search-input" placeholder="Search Stocks/Crypto..." />
-      </div>
+    <main>
+      <section class="search-section">
+        <input type="text" id="search-input" placeholder="Search stocks or crypto..." />
+      </section>
 
-      <div class="stock-list-container">
+      <section class="stock-list-container">
         <table>
           <thead>
             <tr>
               <th></th> <th>#</th>
-              <th>Stocks/Crypto</th>
-              <th>Price</th>
-              <th>Change</th>
-              <th>% Change</th>
+              <th class="sortable" data-sort-by="symbol">Stocks/Crypto <span class="sort-arrow"></span></th>
+              <th class="sortable" data-sort-by="price">Price <span class="sort-arrow"></span></th>
+              <th class="sortable" data-sort-by="change">Change <span class="sort-arrow"></span></th>
+              <th class="sortable" data-sort-by="change_percent">% Change <span class="sort-arrow"></span></th>
               <th>Open</th>
               <th>High</th>
               <th>Low</th>
@@ -37,10 +38,10 @@
           <tbody id="stock-table-body">
             </tbody>
         </table>
-      </main>
+      </section>
+    </main>
 
     <script src="/socket.io/socket.io.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
-

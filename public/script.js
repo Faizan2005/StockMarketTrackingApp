@@ -1,7 +1,7 @@
 const socket = io();
 
 const stockTableBody = document.getElementById("stock-table-body");
-const watchlistButton = document.getElementById("watchlist-button");
+const watchlistButton = document.getElementById("my-watchlist-button");
 const searchInput = document.getElementById("search-input");
 
 let userWatchlist = new Set(); // Start with an empty watchlist
