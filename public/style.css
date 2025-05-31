@@ -6,19 +6,28 @@
 }
 
 body {
-  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Changed font */
-  background-color: #000000; /* Pitch black */
-  color: #ffffff; /* White text */
-  padding: 25px; /* Slightly increased padding for overall balance */
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 25px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* Header/Navigation Styles */
+/* Header/Navigation Styles (for index.html, watchlist.html) */
 .main-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Keeps app-title and nav separate */
+  align-items: center;
+  padding: 10px 0;
+  margin-bottom: 20px;
+}
+
+/* Header for Login Page ONLY */
+.login-page-header {
+  display: flex;
+  justify-content: center; /* Centers the content (app-title) horizontally */
   align-items: center;
   padding: 10px 0;
   margin-bottom: 20px;
@@ -27,16 +36,15 @@ body {
 .app-title {
   font-size: 2.5em;
   font-weight: 700;
-  /* Bluish-violet gradient for the title (Gemini-like) */
-  background: linear-gradient(90deg, #6A11CB 0%, #2575FC 100%); /* Deep Violet to Bright Blue */
+  background: linear-gradient(90deg, #6A11CB 0%, #2575FC 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 /* Watchlist Button - White */
 .nav-button {
-  background-color: #ffffff; /* White background */
-  color: #000000; /* Black text */
+  background-color: #ffffff;
+  color: #000000;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -47,7 +55,7 @@ body {
 }
 
 .nav-button:hover {
-  background-color: #e0e0e0; /* Slightly darker white on hover */
+  background-color: #e0e0e0;
   color: #000000;
 }
 
@@ -78,15 +86,15 @@ body {
   padding: 20px;
   max-width: 1200px;
   margin: 20px auto;
-  background-color: #111111; /* Dark background to match theme */
+  background-color: #111111;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Darker shadow for dark theme */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .watchlist-container h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #ffffff; /* White text for headings */
+  color: #ffffff;
 }
 
 .back-button {
@@ -94,7 +102,7 @@ body {
   width: fit-content;
   margin: 10px auto;
   padding: 10px 20px;
-  background-color: #2575FC; /* Blue from your header gradient */
+  background-color: #2575FC;
   color: white;
   border: none;
   border-radius: 5px;
@@ -105,17 +113,16 @@ body {
 }
 
 .back-button:hover {
-  background-color: #1a5acb; /* Darker blue on hover */
+  background-color: #1a5acb;
 }
-
 
 /* Stock List Container (Table) */
 .stock-list-container {
   flex-grow: 1;
-  overflow-y: auto; /* Enable scrolling for the list */
+  overflow-y: auto;
   border: 1px solid #333333;
   border-radius: 8px;
-  background-color: #111111; /* Slightly lighter black for the table background */
+  background-color: #111111;
 }
 
 table {
@@ -127,14 +134,14 @@ table {
 thead th {
   position: sticky;
   top: 0;
-  background-color: #222222; /* Darker header background */
+  background-color: #222222;
   padding: 12px 15px;
   text-align: left;
   font-weight: bold;
   font-size: 1.1em;
   border-bottom: 1px solid #444444;
   user-select: none;
-  white-space: nowrap; /* Prevent header text from wrapping */
+  white-space: nowrap;
 }
 
 tbody tr {
@@ -147,38 +154,38 @@ tbody tr:last-child {
 }
 
 tbody tr:hover {
-  background-color: #1a1a1a; /* Slight hover effect */
+  background-color: #1a1a1a;
 }
 
 tbody td {
   padding: 12px 15px;
   vertical-align: middle;
-  white-space: nowrap; /* Prevent data text from wrapping */
+  white-space: nowrap;
 }
 
 /* Logo Sizing in Table Cells */
 .logo {
-  width: 32px; /* Increased width */
-  height: 32px; /* Increased height */
-  border-radius: 50%; /* Make them circular for a clean look */
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   vertical-align: middle;
-  margin-right: 8px; /* Spacing between logo and text */
-  object-fit: contain; /* Ensures entire logo is visible */
+  margin-right: 8px;
+  object-fit: contain;
 }
 
 /* Watchlist Toggle Emoji */
 .watchlist-toggle-emoji {
   cursor: pointer;
-  font-size: 1.5em; /* Keep original size, will be thicker due to new char */
+  font-size: 1.5em;
   transition: color 0.2s ease;
 }
 
 .watchlist-toggle-emoji.added {
-  color: #ffffff; /* Bright white when added */
+  color: #ffffff;
 }
 
 .watchlist-toggle-emoji.not-added {
-  color: #555555; /* Dull grey when not added */
+  color: #555555;
 }
 
 /* Price and Change Styling */
@@ -187,17 +194,17 @@ tbody td {
 }
 
 .change-positive {
-  color: #00C800; /* Standard Green */
+  color: #00C800;
   font-weight: 600;
 }
 
 .change-negative {
-  color: #FF4D4D; /* Standard Red */
+  color: #FF4D4D;
   font-weight: 600;
 }
 
 .change-neutral {
-  color: #ffffff; /* White for neutral changes */
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -212,50 +219,66 @@ tbody td {
 }
 
 .stock-list-container::-webkit-scrollbar-thumb {
-  background-color: #888888; /* Aesthetic grey for the thumb */
+  background-color: #888888;
   border-radius: 10px;
   border: 3px solid #222;
 }
 
-/* Login Page Specific Styles */
+/* Login Page Specific Styles - MODIFIED */
 .login-container {
-  flex-grow: 1; /* Allows it to take available space */
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
-  align-items: center; /* Center horizontally */
+  justify-content: center;
+  align-items: center;
   text-align: center;
   padding: 20px;
-  max-width: 600px; /* Limit width for better readability */
-  margin: 50px auto; /* Add margin to separate from header/footer */
-  background-color: #1a1a1a; /* Darker background for the login box */
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); /* Prominent shadow */
+  max-width: 400px;
+  margin: 50px auto;
+  /* REMOVED: background-color, border-radius, box-shadow */
+  background-color: transparent; /* Ensures no background */
+  border: none; /* Ensures no border */
+  box-shadow: none; /* Ensures no shadow */
 }
 
 .login-container h2 {
-  font-size: 2.2em;
-  margin-bottom: 15px;
-  color: #ffffff; /* White text for heading */
-}
-
-.login-container p {
-  font-size: 1.1em;
+  font-size: 2.5em;
+  font-weight: 700;
   margin-bottom: 30px;
-  color: #cccccc; /* Lighter grey for paragraph text */
+  color: #ffffff;
 }
 
-.login-google-button {
-  /* Inherits .nav-button styles, but we can add specific ones */
+/* Style for the Google login button */
+.google-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #cccccc;
   padding: 12px 25px;
+  border-radius: 5px;
+  cursor: pointer;
   font-size: 1.1em;
-  min-width: 200px; /* Ensure button has a good minimum width */
-  text-decoration: none; /* Remove underline from <a> */
-  display: inline-block; /* Allow padding/width for <a> as button */
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  min-width: 250px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* Re-using .nav-button:hover for login-google-button */
-.login-google-button:hover {
-    background-color: #e0e0e0;
-    color: #000000;
+.google-login-button:hover {
+  background-color: #e0e0e0;
+  border-color: #bbbbbb;
+}
+
+/* Style for the Google 'G' icon placeholder */
+.google-icon {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5em;
+  font-weight: 700;
+  color: #4285f4;
+  line-height: 1;
 }
